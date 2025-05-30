@@ -1,0 +1,203 @@
+nohup: ignoring input
+2025-05-28 11:56:04,083 - INFO - Starting MCTS experiment on CartPole-v1 with 1 worker(s).
+2025-05-28 11:56:04,083 - INFO - Master Seed for experiment: 42
+2025-05-28 11:56:04,083 - INFO - --- Running Config 1/16: Sim/move=10, RolloutDepth=5 ---
+2025-05-28 11:56:04,083 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-28 11:56:13,917 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 11:56:15,219 - INFO - Episode 2 (Seed 43) finished. Steps: 171. Reward: 171.00
+2025-05-28 11:56:16,467 - INFO - Episode 3 (Seed 44) finished. Steps: 169. Reward: 169.00
+2025-05-28 11:56:22,606 - INFO - Episode 4 (Seed 45) finished. Steps: 420. Reward: 420.00
+2025-05-28 11:56:26,516 - INFO - Episode 5 (Seed 46) finished. Steps: 326. Reward: 326.00
+2025-05-28 11:56:26,517 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 5
+2025-05-28 11:56:26,517 - INFO - Avg Reward: 317.20 +/- 132.21 (over 5 episodes)
+2025-05-28 11:56:26,517 - INFO - Individual Rewards: [500.0, 171.0, 169.0, 420.0, 326.0]
+2025-05-28 11:56:26,517 - INFO - --- Finished Config 1/16 ---
+2025-05-28 11:56:26,517 - INFO - --- Running Config 2/16: Sim/move=10, RolloutDepth=15 ---
+2025-05-28 11:56:26,517 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-28 11:56:53,328 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 11:56:56,722 - INFO - Episode 2 (Seed 43) finished. Steps: 288. Reward: 288.00
+2025-05-28 11:57:23,169 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 11:57:49,788 - INFO - Episode 4 (Seed 45) finished. Steps: 500. Reward: 500.00
+2025-05-28 11:58:16,563 - INFO - Episode 5 (Seed 46) finished. Steps: 500. Reward: 500.00
+2025-05-28 11:58:16,564 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 15
+2025-05-28 11:58:16,564 - INFO - Avg Reward: 457.60 +/- 84.80 (over 5 episodes)
+2025-05-28 11:58:16,564 - INFO - Individual Rewards: [500.0, 288.0, 500.0, 500.0, 500.0]
+2025-05-28 11:58:16,564 - INFO - --- Finished Config 2/16 ---
+2025-05-28 11:58:16,564 - INFO - --- Running Config 3/16: Sim/move=10, RolloutDepth=30 ---
+2025-05-28 11:58:16,564 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-28 11:58:45,396 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 11:59:13,201 - INFO - Episode 2 (Seed 43) finished. Steps: 500. Reward: 500.00
+2025-05-28 11:59:19,481 - INFO - Episode 3 (Seed 44) finished. Steps: 435. Reward: 435.00
+2025-05-28 11:59:25,285 - INFO - Episode 4 (Seed 45) finished. Steps: 403. Reward: 403.00
+2025-05-28 11:59:30,429 - INFO - Episode 5 (Seed 46) finished. Steps: 392. Reward: 392.00
+2025-05-28 11:59:30,429 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 30
+2025-05-28 11:59:30,429 - INFO - Avg Reward: 446.00 +/- 46.30 (over 5 episodes)
+2025-05-28 11:59:30,429 - INFO - Individual Rewards: [500.0, 500.0, 435.0, 403.0, 392.0]
+2025-05-28 11:59:30,429 - INFO - --- Finished Config 3/16 ---
+2025-05-28 11:59:30,429 - INFO - --- Running Config 4/16: Sim/move=10, RolloutDepth=50 ---
+2025-05-28 11:59:30,429 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 50, Workers: 1, Seed: 42
+2025-05-28 11:59:39,637 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 11:59:47,124 - INFO - Episode 2 (Seed 43) finished. Steps: 493. Reward: 493.00
+2025-05-28 12:00:15,748 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:00:44,316 - INFO - Episode 4 (Seed 45) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:01:13,110 - INFO - Episode 5 (Seed 46) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:01:13,110 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 50
+2025-05-28 12:01:13,110 - INFO - Avg Reward: 498.60 +/- 2.80 (over 5 episodes)
+2025-05-28 12:01:13,110 - INFO - Individual Rewards: [500.0, 493.0, 500.0, 500.0, 500.0]
+2025-05-28 12:01:13,110 - INFO - --- Finished Config 4/16 ---
+2025-05-28 12:01:13,110 - INFO - --- Running Config 5/16: Sim/move=30, RolloutDepth=5 ---
+2025-05-28 12:01:13,110 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 30, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-28 12:01:15,696 - INFO - Episode 1 (Seed 42) finished. Steps: 222. Reward: 222.00
+2025-05-28 12:01:23,590 - INFO - Episode 2 (Seed 43) finished. Steps: 411. Reward: 411.00
+2025-05-28 12:01:38,425 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:01:41,065 - INFO - Episode 4 (Seed 45) finished. Steps: 227. Reward: 227.00
+2025-05-28 12:01:43,170 - INFO - Episode 5 (Seed 46) finished. Steps: 199. Reward: 199.00
+2025-05-28 12:01:43,170 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 30, Rollout Depth: 5
+2025-05-28 12:01:43,170 - INFO - Avg Reward: 311.80 +/- 121.03 (over 5 episodes)
+2025-05-28 12:01:43,170 - INFO - Individual Rewards: [222.0, 411.0, 500.0, 227.0, 199.0]
+2025-05-28 12:01:43,170 - INFO - --- Finished Config 5/16 ---
+2025-05-28 12:01:43,170 - INFO - --- Running Config 6/16: Sim/move=30, RolloutDepth=15 ---
+2025-05-28 12:01:43,170 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 30, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-28 12:03:18,957 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:04:36,421 - INFO - Episode 2 (Seed 43) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:06:12,973 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:06:19,409 - INFO - Episode 4 (Seed 45) finished. Steps: 357. Reward: 357.00
+2025-05-28 12:07:17,989 - INFO - Episode 5 (Seed 46) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:07:17,989 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 30, Rollout Depth: 15
+2025-05-28 12:07:17,989 - INFO - Avg Reward: 471.40 +/- 57.20 (over 5 episodes)
+2025-05-28 12:07:17,989 - INFO - Individual Rewards: [500.0, 500.0, 500.0, 357.0, 500.0]
+2025-05-28 12:07:17,989 - INFO - --- Finished Config 6/16 ---
+2025-05-28 12:07:17,989 - INFO - --- Running Config 7/16: Sim/move=30, RolloutDepth=30 ---
+2025-05-28 12:07:17,989 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 30, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-28 12:08:56,037 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:10:34,039 - INFO - Episode 2 (Seed 43) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:10:40,578 - INFO - Episode 3 (Seed 44) finished. Steps: 362. Reward: 362.00
+2025-05-28 12:12:10,764 - INFO - Episode 4 (Seed 45) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:13:28,158 - INFO - Episode 5 (Seed 46) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:13:28,158 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 30, Rollout Depth: 30
+2025-05-28 12:13:28,158 - INFO - Avg Reward: 472.40 +/- 55.20 (over 5 episodes)
+2025-05-28 12:13:28,158 - INFO - Individual Rewards: [500.0, 500.0, 362.0, 500.0, 500.0]
+2025-05-28 12:13:28,158 - INFO - --- Finished Config 7/16 ---
+2025-05-28 12:13:28,158 - INFO - --- Running Config 8/16: Sim/move=30, RolloutDepth=50 ---
+2025-05-28 12:13:28,158 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 30, Rollout Depth: 50, Workers: 1, Seed: 42
+2025-05-28 12:13:31,753 - INFO - Episode 1 (Seed 42) finished. Steps: 259. Reward: 259.00
+2025-05-28 12:13:36,833 - INFO - Episode 2 (Seed 43) finished. Steps: 340. Reward: 340.00
+2025-05-28 12:15:15,508 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:16:53,203 - INFO - Episode 4 (Seed 45) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:18:13,064 - INFO - Episode 5 (Seed 46) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:18:13,064 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 30, Rollout Depth: 50
+2025-05-28 12:18:13,064 - INFO - Avg Reward: 419.80 +/- 101.51 (over 5 episodes)
+2025-05-28 12:18:13,064 - INFO - Individual Rewards: [259.0, 340.0, 500.0, 500.0, 500.0]
+2025-05-28 12:18:13,064 - INFO - --- Finished Config 8/16 ---
+2025-05-28 12:18:13,064 - INFO - --- Running Config 9/16: Sim/move=60, RolloutDepth=5 ---
+2025-05-28 12:18:13,064 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 60, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-28 12:18:30,389 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:18:33,425 - INFO - Episode 2 (Seed 43) finished. Steps: 209. Reward: 209.00
+2025-05-28 12:18:50,735 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:19:04,101 - INFO - Episode 4 (Seed 45) finished. Steps: 455. Reward: 455.00
+2025-05-28 12:19:06,007 - INFO - Episode 5 (Seed 46) finished. Steps: 161. Reward: 161.00
+2025-05-28 12:19:06,007 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 60, Rollout Depth: 5
+2025-05-28 12:19:06,007 - INFO - Avg Reward: 365.00 +/- 148.66 (over 5 episodes)
+2025-05-28 12:19:06,007 - INFO - Individual Rewards: [500.0, 209.0, 500.0, 455.0, 161.0]
+2025-05-28 12:19:06,007 - INFO - --- Finished Config 9/16 ---
+2025-05-28 12:19:06,007 - INFO - --- Running Config 10/16: Sim/move=60, RolloutDepth=15 ---
+2025-05-28 12:19:06,007 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 60, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-28 12:19:21,482 - INFO - Episode 1 (Seed 42) finished. Steps: 473. Reward: 473.00
+2025-05-28 12:19:33,967 - INFO - Episode 2 (Seed 43) finished. Steps: 428. Reward: 428.00
+2025-05-28 12:21:11,508 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:22:46,957 - INFO - Episode 4 (Seed 45) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:24:02,202 - INFO - Episode 5 (Seed 46) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:24:02,203 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 60, Rollout Depth: 15
+2025-05-28 12:24:02,203 - INFO - Avg Reward: 480.20 +/- 28.12 (over 5 episodes)
+2025-05-28 12:24:02,203 - INFO - Individual Rewards: [473.0, 428.0, 500.0, 500.0, 500.0]
+2025-05-28 12:24:02,203 - INFO - --- Finished Config 10/16 ---
+2025-05-28 12:24:02,203 - INFO - --- Running Config 11/16: Sim/move=60, RolloutDepth=30 ---
+2025-05-28 12:24:02,203 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 60, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-28 12:24:55,923 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:26:13,555 - INFO - Episode 2 (Seed 43) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:27:21,018 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:27:27,859 - INFO - Episode 4 (Seed 45) finished. Steps: 311. Reward: 311.00
+2025-05-28 12:27:37,296 - INFO - Episode 5 (Seed 46) finished. Steps: 382. Reward: 382.00
+2025-05-28 12:27:37,296 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 60, Rollout Depth: 30
+2025-05-28 12:27:37,296 - INFO - Avg Reward: 438.60 +/- 78.48 (over 5 episodes)
+2025-05-28 12:27:37,296 - INFO - Individual Rewards: [500.0, 500.0, 500.0, 311.0, 382.0]
+2025-05-28 12:27:37,296 - INFO - --- Finished Config 11/16 ---
+2025-05-28 12:27:37,296 - INFO - --- Running Config 12/16: Sim/move=60, RolloutDepth=50 ---
+2025-05-28 12:27:37,296 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 60, Rollout Depth: 50, Workers: 1, Seed: 42
+2025-05-28 12:29:24,796 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:31:00,922 - INFO - Episode 2 (Seed 43) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:31:10,048 - INFO - Episode 3 (Seed 44) finished. Steps: 390. Reward: 390.00
+2025-05-28 12:32:21,017 - INFO - Episode 4 (Seed 45) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:32:31,814 - INFO - Episode 5 (Seed 46) finished. Steps: 413. Reward: 413.00
+2025-05-28 12:32:31,814 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 60, Rollout Depth: 50
+2025-05-28 12:32:31,814 - INFO - Avg Reward: 460.60 +/- 48.80 (over 5 episodes)
+2025-05-28 12:32:31,814 - INFO - Individual Rewards: [500.0, 500.0, 390.0, 500.0, 413.0]
+2025-05-28 12:32:31,814 - INFO - --- Finished Config 12/16 ---
+2025-05-28 12:32:31,814 - INFO - --- Running Config 13/16: Sim/move=100, RolloutDepth=5 ---
+2025-05-28 12:32:31,814 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 100, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-28 12:32:38,330 - INFO - Episode 1 (Seed 42) finished. Steps: 270. Reward: 270.00
+2025-05-28 12:32:48,319 - INFO - Episode 2 (Seed 43) finished. Steps: 337. Reward: 337.00
+2025-05-28 12:32:52,926 - INFO - Episode 3 (Seed 44) finished. Steps: 226. Reward: 226.00
+2025-05-28 12:33:02,549 - INFO - Episode 4 (Seed 45) finished. Steps: 329. Reward: 329.00
+2025-05-28 12:33:09,603 - INFO - Episode 5 (Seed 46) finished. Steps: 279. Reward: 279.00
+2025-05-28 12:33:09,604 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 100, Rollout Depth: 5
+2025-05-28 12:33:09,604 - INFO - Avg Reward: 288.20 +/- 40.82 (over 5 episodes)
+2025-05-28 12:33:09,604 - INFO - Individual Rewards: [270.0, 337.0, 226.0, 329.0, 279.0]
+2025-05-28 12:33:09,604 - INFO - --- Finished Config 13/16 ---
+2025-05-28 12:33:09,604 - INFO - --- Running Config 14/16: Sim/move=100, RolloutDepth=15 ---
+2025-05-28 12:33:09,604 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 100, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-28 12:34:24,792 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:36:26,744 - INFO - Episode 2 (Seed 43) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:37:55,706 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:38:08,082 - INFO - Episode 4 (Seed 45) finished. Steps: 362. Reward: 362.00
+2025-05-28 12:39:41,659 - INFO - Episode 5 (Seed 46) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:39:41,659 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 100, Rollout Depth: 15
+2025-05-28 12:39:41,659 - INFO - Avg Reward: 472.40 +/- 55.20 (over 5 episodes)
+2025-05-28 12:39:41,659 - INFO - Individual Rewards: [500.0, 500.0, 500.0, 362.0, 500.0]
+2025-05-28 12:39:41,659 - INFO - --- Finished Config 14/16 ---
+2025-05-28 12:39:41,659 - INFO - --- Running Config 15/16: Sim/move=100, RolloutDepth=30 ---
+2025-05-28 12:39:41,659 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 100, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-28 12:41:37,346 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:41:43,922 - INFO - Episode 2 (Seed 43) finished. Steps: 271. Reward: 271.00
+2025-05-28 12:42:04,771 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:42:10,048 - INFO - Episode 4 (Seed 45) finished. Steps: 234. Reward: 234.00
+2025-05-28 12:43:35,966 - INFO - Episode 5 (Seed 46) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:43:35,966 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 100, Rollout Depth: 30
+2025-05-28 12:43:35,966 - INFO - Avg Reward: 401.00 +/- 121.81 (over 5 episodes)
+2025-05-28 12:43:35,966 - INFO - Individual Rewards: [500.0, 271.0, 500.0, 234.0, 500.0]
+2025-05-28 12:43:35,967 - INFO - --- Finished Config 15/16 ---
+2025-05-28 12:43:35,967 - INFO - --- Running Config 16/16: Sim/move=100, RolloutDepth=50 ---
+2025-05-28 12:43:35,967 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 100, Rollout Depth: 50, Workers: 1, Seed: 42
+2025-05-28 12:45:05,279 - INFO - Episode 1 (Seed 42) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:47:02,583 - INFO - Episode 2 (Seed 43) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:48:22,346 - INFO - Episode 3 (Seed 44) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:50:30,418 - INFO - Episode 4 (Seed 45) finished. Steps: 500. Reward: 500.00
+2025-05-28 12:50:35,232 - INFO - Episode 5 (Seed 46) finished. Steps: 225. Reward: 225.00
+2025-05-28 12:50:35,232 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 100, Rollout Depth: 50
+2025-05-28 12:50:35,232 - INFO - Avg Reward: 445.00 +/- 110.00 (over 5 episodes)
+2025-05-28 12:50:35,232 - INFO - Individual Rewards: [500.0, 500.0, 500.0, 500.0, 225.0]
+2025-05-28 12:50:35,232 - INFO - --- Finished Config 16/16 ---
+2025-05-28 12:50:35,232 - INFO - 
+
+--- Experiment Finished: Summary of Results ---
+===================================================================================
+Sim/Move     | Rollout Depth   | Avg Reward      | Std Reward      | All Rewards
+-----------------------------------------------------------------------------------
+10           | 5               | 317.20          | 132.21          | 500.0, 171.0, 169.0, 420.0, 326.0
+10           | 15              | 457.60          | 84.80           | 500.0, 288.0, 500.0, 500.0, 500.0
+10           | 30              | 446.00          | 46.30           | 500.0, 500.0, 435.0, 403.0, 392.0
+10           | 50              | 498.60          | 2.80            | 500.0, 493.0, 500.0, 500.0, 500.0
+30           | 5               | 311.80          | 121.03          | 222.0, 411.0, 500.0, 227.0, 199.0
+30           | 15              | 471.40          | 57.20           | 500.0, 500.0, 500.0, 357.0, 500.0
+30           | 30              | 472.40          | 55.20           | 500.0, 500.0, 362.0, 500.0, 500.0
+30           | 50              | 419.80          | 101.51          | 259.0, 340.0, 500.0, 500.0, 500.0
+60           | 5               | 365.00          | 148.66          | 500.0, 209.0, 500.0, 455.0, 161.0
+60           | 15              | 480.20          | 28.12           | 473.0, 428.0, 500.0, 500.0, 500.0
+60           | 30              | 438.60          | 78.48           | 500.0, 500.0, 500.0, 311.0, 382.0
+60           | 50              | 460.60          | 48.80           | 500.0, 500.0, 390.0, 500.0, 413.0
+100          | 5               | 288.20          | 40.82           | 270.0, 337.0, 226.0, 329.0, 279.0
+100          | 15              | 472.40          | 55.20           | 500.0, 500.0, 500.0, 362.0, 500.0
+100          | 30              | 401.00          | 121.81          | 500.0, 271.0, 500.0, 234.0, 500.0
+100          | 50              | 445.00          | 110.00          | 500.0, 500.0, 500.0, 500.0, 225.0
+===================================================================================
+2025-05-28 12:50:35,709 - INFO - Experiment script finished.

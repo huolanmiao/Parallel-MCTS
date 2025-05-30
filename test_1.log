@@ -1,0 +1,23 @@
+nohup: ignoring input
+2025-05-30 01:27:02,490 - INFO - Starting MCTS evaluation on CartPole-v1 with 1 worker(s).
+2025-05-30 01:27:02,490 - INFO - Initializing MCTS agent for CartPole-v1...
+/root/anaconda3/envs/py310/lib/python3.10/site-packages/gymnasium/wrappers/rendering.py:283: UserWarning: [33mWARN: Overwriting existing videos at /root/.jupyter/pengyu/Parallel_MCTS/CartPole-v1-agent folder (try specifying a different `video_folder` for the `RecordVideo` wrapper if this is not desired)[0m
+  logger.warn(
+2025-05-30 01:27:02,739 - INFO - Starting evaluation for 5 episodes on CartPole-v1...
+error: XDG_RUNTIME_DIR not set in the environment.
+2025-05-30 01:30:14,779 - INFO - Episode 1 finished after 500 steps. Reward: 500.0
+2025-05-30 01:32:38,652 - INFO - Episode 2 finished after 432 steps. Reward: 432.0
+2025-05-30 01:35:51,042 - INFO - Episode 3 finished after 500 steps. Reward: 500.0
+2025-05-30 01:38:33,446 - INFO - Episode 4 finished after 461 steps. Reward: 461.0
+2025-05-30 01:39:55,852 - INFO - Episode 5 finished after 318 steps. Reward: 318.0
+2025-05-30 01:39:56,175 - INFO - 
+Evaluation Complete for CartPole-v1.
+2025-05-30 01:39:56,175 - INFO - Number of Episodes: 5
+2025-05-30 01:39:56,175 - INFO - Simulations per Move (MCTS budget): 100
+2025-05-30 01:39:56,175 - INFO - Rollout Depth (within simulation): 100
+2025-05-30 01:39:56,175 - INFO - Number of Parallel Workers: 1
+2025-05-30 01:39:56,175 - INFO - Average Reward: 442.20
+2025-05-30 01:39:56,175 - INFO - Standard Deviation of Rewards: 67.18
+2025-05-30 01:39:56,175 - INFO - Individual Rewards: [500.0, 432.0, 500.0, 461.0, 318.0]
+2025-05-30 01:39:56,175 - INFO - Average Search Time per Move: 0.3470 seconds
+2025-05-30 01:39:56,175 - INFO - Search Time Standard Deviation: 0.1655 seconds

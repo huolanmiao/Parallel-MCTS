@@ -1,0 +1,18 @@
+nohup: ignoring input
+2025-05-29 14:07:37,627 - INFO - Starting MCTS evaluation on ALE/Breakout-v5 with 1 worker(s).
+2025-05-29 14:07:37,627 - INFO - Initializing MCTS agent for ALE/Breakout-v5...
+A.L.E: Arcade Learning Environment (version 0.11.0+dfae0bd)
+[Powered by Stella]
+Traceback (most recent call last):
+  File "/root/.jupyter/pengyu/Parallel_MCTS/MCTS_basic.py", line 376, in <module>
+    evaluate_mcts_on_env(
+  File "/root/.jupyter/pengyu/Parallel_MCTS/MCTS_basic.py", line 297, in evaluate_mcts_on_env
+    env = RecordVideo(env, video_folder=f"{env_name}-agent", name_prefix="eval",
+  File "/root/anaconda3/envs/py310/lib/python3.10/site-packages/gymnasium/wrappers/rendering.py", line 267, in __init__
+    raise ValueError(
+ValueError: ('Render mode is None, which is incompatible with RecordVideo.', 'Initialize your environment with a render_mode that returns an image, such as rgb_array.')
+Exception ignored in: <function RecordVideo.__del__ at 0x7fccb04e1120>
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py310/lib/python3.10/site-packages/gymnasium/wrappers/rendering.py", line 415, in __del__
+    if len(self.recorded_frames) > 0:
+AttributeError: 'RecordVideo' object has no attribute 'recorded_frames'

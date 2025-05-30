@@ -1,0 +1,525 @@
+nohup: ignoring input
+2025-05-29 02:35:54,246 - INFO - Starting MCTS experiment on CartPole-v1 with 1 worker(s).
+2025-05-29 02:35:54,246 - INFO - Master Seed for experiment: 42
+2025-05-29 02:35:54,246 - INFO - Reuse MCTS tree across episodes: False
+2025-05-29 02:35:54,246 - INFO - Defining parameter ranges for the experiment...
+2025-05-29 02:35:54,246 - INFO - Simulations per Move Options: [1, 2, 5, 10, 20, 35, 55]
+2025-05-29 02:35:54,246 - INFO - Rollout Depth Options: [5, 10, 15, 20, 25, 30]
+2025-05-29 02:35:54,246 - INFO - Starting the MCTS experiment with the defined parameter ranges...
+2025-05-29 02:35:54,246 - INFO - --- Running Config 1/42: Sim/move=1, RolloutDepth=5 ---
+2025-05-29 02:35:54,246 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 1, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-29 02:35:54,311 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 1, Rollout Depth: 5
+2025-05-29 02:35:54,311 - INFO - Avg Reward: 19.40 +/- 11.38 (over 5 episodes)
+2025-05-29 02:35:54,311 - INFO - Individual Rewards: [10.0, 18.0, 10.0, 18.0, 41.0]
+2025-05-29 02:35:54,311 - INFO - Total search time for all episodes: 0.0612 seconds
+2025-05-29 02:35:54,311 - INFO - Average search time per move: 0.0006 seconds (std: 0.0002 seconds)
+2025-05-29 02:35:54,311 - INFO - --- Finished Config 1/42 ---
+
+
+2025-05-29 02:35:54,311 - INFO - --- Running Config 2/42: Sim/move=1, RolloutDepth=10 ---
+2025-05-29 02:35:54,311 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 1, Rollout Depth: 10, Workers: 1, Seed: 42
+2025-05-29 02:35:54,368 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 1, Rollout Depth: 10
+2025-05-29 02:35:54,368 - INFO - Avg Reward: 17.60 +/- 4.63 (over 5 episodes)
+2025-05-29 02:35:54,368 - INFO - Individual Rewards: [18.0, 25.0, 19.0, 15.0, 11.0]
+2025-05-29 02:35:54,368 - INFO - Total search time for all episodes: 0.0544 seconds
+2025-05-29 02:35:54,368 - INFO - Average search time per move: 0.0006 seconds (std: 0.0001 seconds)
+2025-05-29 02:35:54,368 - INFO - --- Finished Config 2/42 ---
+
+
+2025-05-29 02:35:54,368 - INFO - --- Running Config 3/42: Sim/move=1, RolloutDepth=15 ---
+2025-05-29 02:35:54,368 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 1, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-29 02:35:54,420 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 1, Rollout Depth: 15
+2025-05-29 02:35:54,420 - INFO - Avg Reward: 16.40 +/- 2.87 (over 5 episodes)
+2025-05-29 02:35:54,420 - INFO - Individual Rewards: [21.0, 13.0, 18.0, 14.0, 16.0]
+2025-05-29 02:35:54,420 - INFO - Total search time for all episodes: 0.0494 seconds
+2025-05-29 02:35:54,420 - INFO - Average search time per move: 0.0006 seconds (std: 0.0001 seconds)
+2025-05-29 02:35:54,420 - INFO - --- Finished Config 3/42 ---
+
+
+2025-05-29 02:35:54,420 - INFO - --- Running Config 4/42: Sim/move=1, RolloutDepth=20 ---
+2025-05-29 02:35:54,420 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 1, Rollout Depth: 20, Workers: 1, Seed: 42
+2025-05-29 02:35:54,479 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 1, Rollout Depth: 20
+2025-05-29 02:35:54,479 - INFO - Avg Reward: 17.80 +/- 5.19 (over 5 episodes)
+2025-05-29 02:35:54,479 - INFO - Individual Rewards: [12.0, 23.0, 15.0, 25.0, 14.0]
+2025-05-29 02:35:54,479 - INFO - Total search time for all episodes: 0.0565 seconds
+2025-05-29 02:35:54,479 - INFO - Average search time per move: 0.0006 seconds (std: 0.0002 seconds)
+2025-05-29 02:35:54,479 - INFO - --- Finished Config 4/42 ---
+
+
+2025-05-29 02:35:54,479 - INFO - --- Running Config 5/42: Sim/move=1, RolloutDepth=25 ---
+2025-05-29 02:35:54,479 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 1, Rollout Depth: 25, Workers: 1, Seed: 42
+2025-05-29 02:35:54,587 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 1, Rollout Depth: 25
+2025-05-29 02:35:54,587 - INFO - Avg Reward: 29.00 +/- 6.07 (over 5 episodes)
+2025-05-29 02:35:54,587 - INFO - Individual Rewards: [21.0, 29.0, 25.0, 39.0, 31.0]
+2025-05-29 02:35:54,587 - INFO - Total search time for all episodes: 0.1052 seconds
+2025-05-29 02:35:54,587 - INFO - Average search time per move: 0.0007 seconds (std: 0.0001 seconds)
+2025-05-29 02:35:54,587 - INFO - --- Finished Config 5/42 ---
+
+
+2025-05-29 02:35:54,587 - INFO - --- Running Config 6/42: Sim/move=1, RolloutDepth=30 ---
+2025-05-29 02:35:54,587 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 1, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-29 02:35:54,694 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 1, Rollout Depth: 30
+2025-05-29 02:35:54,694 - INFO - Avg Reward: 27.20 +/- 15.99 (over 5 episodes)
+2025-05-29 02:35:54,694 - INFO - Individual Rewards: [22.0, 57.0, 28.0, 19.0, 10.0]
+2025-05-29 02:35:54,694 - INFO - Total search time for all episodes: 0.1045 seconds
+2025-05-29 02:35:54,694 - INFO - Average search time per move: 0.0008 seconds (std: 0.0002 seconds)
+2025-05-29 02:35:54,694 - INFO - --- Finished Config 6/42 ---
+
+
+2025-05-29 02:35:54,694 - INFO - --- Running Config 7/42: Sim/move=2, RolloutDepth=5 ---
+2025-05-29 02:35:54,694 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 2, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-29 02:35:54,804 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 2, Rollout Depth: 5
+2025-05-29 02:35:54,804 - INFO - Avg Reward: 17.80 +/- 11.32 (over 5 episodes)
+2025-05-29 02:35:54,804 - INFO - Individual Rewards: [40.0, 10.0, 13.0, 16.0, 10.0]
+2025-05-29 02:35:54,804 - INFO - Total search time for all episodes: 0.1074 seconds
+2025-05-29 02:35:54,804 - INFO - Average search time per move: 0.0012 seconds (std: 0.0003 seconds)
+2025-05-29 02:35:54,804 - INFO - --- Finished Config 7/42 ---
+
+
+2025-05-29 02:35:54,804 - INFO - --- Running Config 8/42: Sim/move=2, RolloutDepth=10 ---
+2025-05-29 02:35:54,804 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 2, Rollout Depth: 10, Workers: 1, Seed: 42
+2025-05-29 02:35:55,022 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 2, Rollout Depth: 10
+2025-05-29 02:35:55,022 - INFO - Avg Reward: 29.00 +/- 14.89 (over 5 episodes)
+2025-05-29 02:35:55,022 - INFO - Individual Rewards: [10.0, 36.0, 18.0, 28.0, 53.0]
+2025-05-29 02:35:55,022 - INFO - Total search time for all episodes: 0.2147 seconds
+2025-05-29 02:35:55,022 - INFO - Average search time per move: 0.0015 seconds (std: 0.0004 seconds)
+2025-05-29 02:35:55,022 - INFO - --- Finished Config 8/42 ---
+
+
+2025-05-29 02:35:55,022 - INFO - --- Running Config 9/42: Sim/move=2, RolloutDepth=15 ---
+2025-05-29 02:35:55,022 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 2, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-29 02:35:55,146 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 2, Rollout Depth: 15
+2025-05-29 02:35:55,146 - INFO - Avg Reward: 19.40 +/- 9.65 (over 5 episodes)
+2025-05-29 02:35:55,146 - INFO - Individual Rewards: [15.0, 10.0, 11.0, 26.0, 35.0]
+2025-05-29 02:35:55,146 - INFO - Total search time for all episodes: 0.1220 seconds
+2025-05-29 02:35:55,146 - INFO - Average search time per move: 0.0013 seconds (std: 0.0003 seconds)
+2025-05-29 02:35:55,146 - INFO - --- Finished Config 9/42 ---
+
+
+2025-05-29 02:35:55,146 - INFO - --- Running Config 10/42: Sim/move=2, RolloutDepth=20 ---
+2025-05-29 02:35:55,146 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 2, Rollout Depth: 20, Workers: 1, Seed: 42
+2025-05-29 02:35:55,343 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 2, Rollout Depth: 20
+2025-05-29 02:35:55,343 - INFO - Avg Reward: 27.40 +/- 13.46 (over 5 episodes)
+2025-05-29 02:35:55,343 - INFO - Individual Rewards: [14.0, 21.0, 22.0, 27.0, 53.0]
+2025-05-29 02:35:55,343 - INFO - Total search time for all episodes: 0.1941 seconds
+2025-05-29 02:35:55,343 - INFO - Average search time per move: 0.0014 seconds (std: 0.0004 seconds)
+2025-05-29 02:35:55,343 - INFO - --- Finished Config 10/42 ---
+
+
+2025-05-29 02:35:55,343 - INFO - --- Running Config 11/42: Sim/move=2, RolloutDepth=25 ---
+2025-05-29 02:35:55,343 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 2, Rollout Depth: 25, Workers: 1, Seed: 42
+2025-05-29 02:35:55,506 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 2, Rollout Depth: 25
+2025-05-29 02:35:55,506 - INFO - Avg Reward: 23.20 +/- 11.60 (over 5 episodes)
+2025-05-29 02:35:55,506 - INFO - Individual Rewards: [45.0, 23.0, 12.0, 21.0, 15.0]
+2025-05-29 02:35:55,506 - INFO - Total search time for all episodes: 0.1597 seconds
+2025-05-29 02:35:55,506 - INFO - Average search time per move: 0.0014 seconds (std: 0.0004 seconds)
+2025-05-29 02:35:55,506 - INFO - --- Finished Config 11/42 ---
+
+
+2025-05-29 02:35:55,506 - INFO - --- Running Config 12/42: Sim/move=2, RolloutDepth=30 ---
+2025-05-29 02:35:55,506 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 2, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-29 02:35:55,684 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 2, Rollout Depth: 30
+2025-05-29 02:35:55,684 - INFO - Avg Reward: 25.40 +/- 9.93 (over 5 episodes)
+2025-05-29 02:35:55,684 - INFO - Individual Rewards: [9.0, 33.0, 24.0, 38.0, 23.0]
+2025-05-29 02:35:55,684 - INFO - Total search time for all episodes: 0.1755 seconds
+2025-05-29 02:35:55,684 - INFO - Average search time per move: 0.0014 seconds (std: 0.0003 seconds)
+2025-05-29 02:35:55,684 - INFO - --- Finished Config 12/42 ---
+
+
+2025-05-29 02:35:55,684 - INFO - --- Running Config 13/42: Sim/move=5, RolloutDepth=5 ---
+2025-05-29 02:35:55,684 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 5, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-29 02:36:12,626 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 5, Rollout Depth: 5
+2025-05-29 02:36:12,627 - INFO - Avg Reward: 275.00 +/- 99.92 (over 5 episodes)
+2025-05-29 02:36:12,627 - INFO - Individual Rewards: [314.0, 207.0, 357.0, 382.0, 115.0]
+2025-05-29 02:36:12,627 - INFO - Total search time for all episodes: 16.9259 seconds
+2025-05-29 02:36:12,627 - INFO - Average search time per move: 0.0123 seconds (std: 0.0065 seconds)
+2025-05-29 02:36:12,627 - INFO - --- Finished Config 13/42 ---
+
+
+2025-05-29 02:36:12,627 - INFO - --- Running Config 14/42: Sim/move=5, RolloutDepth=10 ---
+2025-05-29 02:36:12,627 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 5, Rollout Depth: 10, Workers: 1, Seed: 42
+2025-05-29 02:36:38,258 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 5, Rollout Depth: 10
+2025-05-29 02:36:38,258 - INFO - Avg Reward: 341.60 +/- 129.33 (over 5 episodes)
+2025-05-29 02:36:38,258 - INFO - Individual Rewards: [202.0, 194.0, 473.0, 339.0, 500.0]
+2025-05-29 02:36:38,258 - INFO - Total search time for all episodes: 25.6110 seconds
+2025-05-29 02:36:38,258 - INFO - Average search time per move: 0.0150 seconds (std: 0.0085 seconds)
+2025-05-29 02:36:38,258 - INFO - --- Finished Config 14/42 ---
+
+
+2025-05-29 02:36:38,258 - INFO - --- Running Config 15/42: Sim/move=5, RolloutDepth=15 ---
+2025-05-29 02:36:38,258 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 5, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-29 02:37:06,679 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 5, Rollout Depth: 15
+2025-05-29 02:37:06,679 - INFO - Avg Reward: 361.60 +/- 129.92 (over 5 episodes)
+2025-05-29 02:37:06,680 - INFO - Individual Rewards: [500.0, 386.0, 203.0, 500.0, 219.0]
+2025-05-29 02:37:06,680 - INFO - Total search time for all episodes: 28.4001 seconds
+2025-05-29 02:37:06,680 - INFO - Average search time per move: 0.0157 seconds (std: 0.0087 seconds)
+2025-05-29 02:37:06,680 - INFO - --- Finished Config 15/42 ---
+
+
+2025-05-29 02:37:06,680 - INFO - --- Running Config 16/42: Sim/move=5, RolloutDepth=20 ---
+2025-05-29 02:37:06,680 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 5, Rollout Depth: 20, Workers: 1, Seed: 42
+2025-05-29 02:37:26,766 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 5, Rollout Depth: 20
+2025-05-29 02:37:26,766 - INFO - Avg Reward: 299.40 +/- 106.65 (over 5 episodes)
+2025-05-29 02:37:26,766 - INFO - Individual Rewards: [269.0, 500.0, 297.0, 244.0, 187.0]
+2025-05-29 02:37:26,766 - INFO - Total search time for all episodes: 20.0688 seconds
+2025-05-29 02:37:26,766 - INFO - Average search time per move: 0.0134 seconds (std: 0.0075 seconds)
+2025-05-29 02:37:26,766 - INFO - --- Finished Config 16/42 ---
+
+
+2025-05-29 02:37:26,766 - INFO - --- Running Config 17/42: Sim/move=5, RolloutDepth=25 ---
+2025-05-29 02:37:26,766 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 5, Rollout Depth: 25, Workers: 1, Seed: 42
+2025-05-29 02:37:44,386 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 5, Rollout Depth: 25
+2025-05-29 02:37:44,386 - INFO - Avg Reward: 277.40 +/- 98.78 (over 5 episodes)
+2025-05-29 02:37:44,386 - INFO - Individual Rewards: [243.0, 427.0, 169.0, 356.0, 192.0]
+2025-05-29 02:37:44,386 - INFO - Total search time for all episodes: 17.6041 seconds
+2025-05-29 02:37:44,386 - INFO - Average search time per move: 0.0127 seconds (std: 0.0068 seconds)
+2025-05-29 02:37:44,386 - INFO - --- Finished Config 17/42 ---
+
+
+2025-05-29 02:37:44,386 - INFO - --- Running Config 18/42: Sim/move=5, RolloutDepth=30 ---
+2025-05-29 02:37:44,386 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 5, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-29 02:38:08,003 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 5, Rollout Depth: 30
+2025-05-29 02:38:08,003 - INFO - Avg Reward: 332.00 +/- 95.16 (over 5 episodes)
+2025-05-29 02:38:08,003 - INFO - Individual Rewards: [343.0, 225.0, 334.0, 500.0, 258.0]
+2025-05-29 02:38:08,003 - INFO - Total search time for all episodes: 23.5972 seconds
+2025-05-29 02:38:08,003 - INFO - Average search time per move: 0.0142 seconds (std: 0.0075 seconds)
+2025-05-29 02:38:08,003 - INFO - --- Finished Config 18/42 ---
+
+
+2025-05-29 02:38:08,003 - INFO - --- Running Config 19/42: Sim/move=10, RolloutDepth=5 ---
+2025-05-29 02:38:08,003 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-29 02:39:04,832 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 5
+2025-05-29 02:39:04,833 - INFO - Avg Reward: 374.60 +/- 104.69 (over 5 episodes)
+2025-05-29 02:39:04,833 - INFO - Individual Rewards: [359.0, 187.0, 500.0, 431.0, 396.0]
+2025-05-29 02:39:04,833 - INFO - Total search time for all episodes: 56.8080 seconds
+2025-05-29 02:39:04,833 - INFO - Average search time per move: 0.0303 seconds (std: 0.0161 seconds)
+2025-05-29 02:39:04,833 - INFO - --- Finished Config 19/42 ---
+
+
+2025-05-29 02:39:04,833 - INFO - --- Running Config 20/42: Sim/move=10, RolloutDepth=10 ---
+2025-05-29 02:39:04,833 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 10, Workers: 1, Seed: 42
+2025-05-29 02:40:16,650 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 10
+2025-05-29 02:40:16,650 - INFO - Avg Reward: 428.80 +/- 87.39 (over 5 episodes)
+2025-05-29 02:40:16,650 - INFO - Individual Rewards: [500.0, 313.0, 331.0, 500.0, 500.0]
+2025-05-29 02:40:16,650 - INFO - Total search time for all episodes: 71.7923 seconds
+2025-05-29 02:40:16,650 - INFO - Average search time per move: 0.0335 seconds (std: 0.0174 seconds)
+2025-05-29 02:40:16,650 - INFO - --- Finished Config 20/42 ---
+
+
+2025-05-29 02:40:16,650 - INFO - --- Running Config 21/42: Sim/move=10, RolloutDepth=15 ---
+2025-05-29 02:40:16,650 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-29 02:41:30,464 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 15
+2025-05-29 02:41:30,464 - INFO - Avg Reward: 433.80 +/- 81.22 (over 5 episodes)
+2025-05-29 02:41:30,464 - INFO - Individual Rewards: [500.0, 327.0, 500.0, 500.0, 342.0]
+2025-05-29 02:41:30,464 - INFO - Total search time for all episodes: 73.7888 seconds
+2025-05-29 02:41:30,464 - INFO - Average search time per move: 0.0340 seconds (std: 0.0174 seconds)
+2025-05-29 02:41:30,464 - INFO - --- Finished Config 21/42 ---
+
+
+2025-05-29 02:41:30,464 - INFO - --- Running Config 22/42: Sim/move=10, RolloutDepth=20 ---
+2025-05-29 02:41:30,464 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 20, Workers: 1, Seed: 42
+2025-05-29 02:42:46,261 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 20
+2025-05-29 02:42:46,261 - INFO - Avg Reward: 431.40 +/- 117.78 (over 5 episodes)
+2025-05-29 02:42:46,261 - INFO - Individual Rewards: [500.0, 198.0, 500.0, 459.0, 500.0]
+2025-05-29 02:42:46,261 - INFO - Total search time for all episodes: 75.7711 seconds
+2025-05-29 02:42:46,261 - INFO - Average search time per move: 0.0351 seconds (std: 0.0181 seconds)
+2025-05-29 02:42:46,261 - INFO - --- Finished Config 22/42 ---
+
+
+2025-05-29 02:42:46,261 - INFO - --- Running Config 23/42: Sim/move=10, RolloutDepth=25 ---
+2025-05-29 02:42:46,261 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 25, Workers: 1, Seed: 42
+2025-05-29 02:43:39,067 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 25
+2025-05-29 02:43:39,067 - INFO - Avg Reward: 353.40 +/- 97.74 (over 5 episodes)
+2025-05-29 02:43:39,067 - INFO - Individual Rewards: [227.0, 407.0, 365.0, 268.0, 500.0]
+2025-05-29 02:43:39,067 - INFO - Total search time for all episodes: 52.7845 seconds
+2025-05-29 02:43:39,067 - INFO - Average search time per move: 0.0299 seconds (std: 0.0155 seconds)
+2025-05-29 02:43:39,067 - INFO - --- Finished Config 23/42 ---
+
+
+2025-05-29 02:43:39,067 - INFO - --- Running Config 24/42: Sim/move=10, RolloutDepth=30 ---
+2025-05-29 02:43:39,067 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 10, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-29 02:44:35,508 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 10, Rollout Depth: 30
+2025-05-29 02:44:35,508 - INFO - Avg Reward: 361.60 +/- 116.68 (over 5 episodes)
+2025-05-29 02:44:35,508 - INFO - Individual Rewards: [500.0, 303.0, 288.0, 217.0, 500.0]
+2025-05-29 02:44:35,508 - INFO - Total search time for all episodes: 56.4193 seconds
+2025-05-29 02:44:35,508 - INFO - Average search time per move: 0.0312 seconds (std: 0.0169 seconds)
+2025-05-29 02:44:35,508 - INFO - --- Finished Config 24/42 ---
+
+
+2025-05-29 02:44:35,508 - INFO - --- Running Config 25/42: Sim/move=20, RolloutDepth=5 ---
+2025-05-29 02:44:35,508 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 20, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-29 02:46:41,213 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 20, Rollout Depth: 5
+2025-05-29 02:46:41,213 - INFO - Avg Reward: 403.00 +/- 62.05 (over 5 episodes)
+2025-05-29 02:46:41,213 - INFO - Individual Rewards: [355.0, 336.0, 500.0, 374.0, 450.0]
+2025-05-29 02:46:41,213 - INFO - Total search time for all episodes: 125.6810 seconds
+2025-05-29 02:46:41,213 - INFO - Average search time per move: 0.0624 seconds (std: 0.0316 seconds)
+2025-05-29 02:46:41,213 - INFO - --- Finished Config 25/42 ---
+
+
+2025-05-29 02:46:41,213 - INFO - --- Running Config 26/42: Sim/move=20, RolloutDepth=10 ---
+2025-05-29 02:46:41,213 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 20, Rollout Depth: 10, Workers: 1, Seed: 42
+2025-05-29 02:49:47,156 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 20, Rollout Depth: 10
+2025-05-29 02:49:47,157 - INFO - Avg Reward: 500.00 +/- 0.00 (over 5 episodes)
+2025-05-29 02:49:47,157 - INFO - Individual Rewards: [500.0, 500.0, 500.0, 500.0, 500.0]
+2025-05-29 02:49:47,157 - INFO - Total search time for all episodes: 185.9137 seconds
+2025-05-29 02:49:47,157 - INFO - Average search time per move: 0.0744 seconds (std: 0.0367 seconds)
+2025-05-29 02:49:47,157 - INFO - --- Finished Config 26/42 ---
+
+
+2025-05-29 02:49:47,157 - INFO - --- Running Config 27/42: Sim/move=20, RolloutDepth=15 ---
+2025-05-29 02:49:47,157 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 20, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-29 02:52:20,383 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 20, Rollout Depth: 15
+2025-05-29 02:52:20,383 - INFO - Avg Reward: 438.60 +/- 95.28 (over 5 episodes)
+2025-05-29 02:52:20,383 - INFO - Individual Rewards: [500.0, 500.0, 439.0, 254.0, 500.0]
+2025-05-29 02:52:20,383 - INFO - Total search time for all episodes: 153.2004 seconds
+2025-05-29 02:52:20,383 - INFO - Average search time per move: 0.0699 seconds (std: 0.0362 seconds)
+2025-05-29 02:52:20,383 - INFO - --- Finished Config 27/42 ---
+
+
+2025-05-29 02:52:20,383 - INFO - --- Running Config 28/42: Sim/move=20, RolloutDepth=20 ---
+2025-05-29 02:52:20,383 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 20, Rollout Depth: 20, Workers: 1, Seed: 42
+2025-05-29 02:54:59,652 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 20, Rollout Depth: 20
+2025-05-29 02:54:59,652 - INFO - Avg Reward: 452.20 +/- 66.39 (over 5 episodes)
+2025-05-29 02:54:59,652 - INFO - Individual Rewards: [500.0, 500.0, 430.0, 500.0, 331.0]
+2025-05-29 02:54:59,652 - INFO - Total search time for all episodes: 159.2420 seconds
+2025-05-29 02:54:59,652 - INFO - Average search time per move: 0.0704 seconds (std: 0.0349 seconds)
+2025-05-29 02:54:59,653 - INFO - --- Finished Config 28/42 ---
+
+
+2025-05-29 02:54:59,653 - INFO - --- Running Config 29/42: Sim/move=20, RolloutDepth=25 ---
+2025-05-29 02:54:59,653 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 20, Rollout Depth: 25, Workers: 1, Seed: 42
+2025-05-29 02:57:20,423 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 20, Rollout Depth: 25
+2025-05-29 02:57:20,423 - INFO - Avg Reward: 417.60 +/- 85.77 (over 5 episodes)
+2025-05-29 02:57:20,423 - INFO - Individual Rewards: [396.0, 500.0, 425.0, 500.0, 267.0]
+2025-05-29 02:57:20,423 - INFO - Total search time for all episodes: 140.7456 seconds
+2025-05-29 02:57:20,423 - INFO - Average search time per move: 0.0674 seconds (std: 0.0337 seconds)
+2025-05-29 02:57:20,424 - INFO - --- Finished Config 29/42 ---
+
+
+2025-05-29 02:57:20,424 - INFO - --- Running Config 30/42: Sim/move=20, RolloutDepth=30 ---
+2025-05-29 02:57:20,424 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 20, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-29 02:59:24,937 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 20, Rollout Depth: 30
+2025-05-29 02:59:24,937 - INFO - Avg Reward: 394.20 +/- 59.71 (over 5 episodes)
+2025-05-29 02:59:24,937 - INFO - Individual Rewards: [342.0, 386.0, 334.0, 409.0, 500.0]
+2025-05-29 02:59:24,937 - INFO - Total search time for all episodes: 124.4899 seconds
+2025-05-29 02:59:24,937 - INFO - Average search time per move: 0.0632 seconds (std: 0.0310 seconds)
+2025-05-29 02:59:24,937 - INFO - --- Finished Config 30/42 ---
+
+
+2025-05-29 02:59:24,937 - INFO - --- Running Config 31/42: Sim/move=35, RolloutDepth=5 ---
+2025-05-29 02:59:24,937 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 35, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-29 03:01:43,863 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 35, Rollout Depth: 5
+2025-05-29 03:01:43,863 - INFO - Avg Reward: 295.00 +/- 121.76 (over 5 episodes)
+2025-05-29 03:01:43,863 - INFO - Individual Rewards: [323.0, 500.0, 176.0, 165.0, 311.0]
+2025-05-29 03:01:43,863 - INFO - Total search time for all episodes: 138.9079 seconds
+2025-05-29 03:01:43,863 - INFO - Average search time per move: 0.0942 seconds (std: 0.0547 seconds)
+2025-05-29 03:01:43,863 - INFO - --- Finished Config 31/42 ---
+
+
+2025-05-29 03:01:43,863 - INFO - --- Running Config 32/42: Sim/move=35, RolloutDepth=10 ---
+2025-05-29 03:01:43,863 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 35, Rollout Depth: 10, Workers: 1, Seed: 42
+2025-05-29 03:07:09,304 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 35, Rollout Depth: 10
+2025-05-29 03:07:09,304 - INFO - Avg Reward: 500.00 +/- 0.00 (over 5 episodes)
+2025-05-29 03:07:09,304 - INFO - Individual Rewards: [500.0, 500.0, 500.0, 500.0, 500.0]
+2025-05-29 03:07:09,304 - INFO - Total search time for all episodes: 325.4090 seconds
+2025-05-29 03:07:09,304 - INFO - Average search time per move: 0.1302 seconds (std: 0.0642 seconds)
+2025-05-29 03:07:09,304 - INFO - --- Finished Config 32/42 ---
+
+
+2025-05-29 03:07:09,304 - INFO - --- Running Config 33/42: Sim/move=35, RolloutDepth=15 ---
+2025-05-29 03:07:09,304 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 35, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-29 03:12:31,935 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 35, Rollout Depth: 15
+2025-05-29 03:12:31,935 - INFO - Avg Reward: 495.60 +/- 8.80 (over 5 episodes)
+2025-05-29 03:12:31,935 - INFO - Individual Rewards: [478.0, 500.0, 500.0, 500.0, 500.0]
+2025-05-29 03:12:31,935 - INFO - Total search time for all episodes: 322.6008 seconds
+2025-05-29 03:12:31,935 - INFO - Average search time per move: 0.1302 seconds (std: 0.0636 seconds)
+2025-05-29 03:12:31,935 - INFO - --- Finished Config 33/42 ---
+
+
+2025-05-29 03:12:31,935 - INFO - --- Running Config 34/42: Sim/move=35, RolloutDepth=20 ---
+2025-05-29 03:12:31,935 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 35, Rollout Depth: 20, Workers: 1, Seed: 42
+2025-05-29 03:18:02,175 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 35, Rollout Depth: 20
+2025-05-29 03:18:02,176 - INFO - Avg Reward: 500.00 +/- 0.00 (over 5 episodes)
+2025-05-29 03:18:02,176 - INFO - Individual Rewards: [500.0, 500.0, 500.0, 500.0, 500.0]
+2025-05-29 03:18:02,176 - INFO - Total search time for all episodes: 330.2091 seconds
+2025-05-29 03:18:02,176 - INFO - Average search time per move: 0.1321 seconds (std: 0.0641 seconds)
+2025-05-29 03:18:02,177 - INFO - --- Finished Config 34/42 ---
+
+
+2025-05-29 03:18:02,177 - INFO - --- Running Config 35/42: Sim/move=35, RolloutDepth=25 ---
+2025-05-29 03:18:02,177 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 35, Rollout Depth: 25, Workers: 1, Seed: 42
+2025-05-29 03:22:33,572 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 35, Rollout Depth: 25
+2025-05-29 03:22:33,572 - INFO - Avg Reward: 439.60 +/- 96.45 (over 5 episodes)
+2025-05-29 03:22:33,572 - INFO - Individual Rewards: [500.0, 248.0, 475.0, 475.0, 500.0]
+2025-05-29 03:22:33,572 - INFO - Total search time for all episodes: 271.3679 seconds
+2025-05-29 03:22:33,572 - INFO - Average search time per move: 0.1235 seconds (std: 0.0621 seconds)
+2025-05-29 03:22:33,572 - INFO - --- Finished Config 35/42 ---
+
+
+2025-05-29 03:22:33,572 - INFO - --- Running Config 36/42: Sim/move=35, RolloutDepth=30 ---
+2025-05-29 03:22:33,572 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 35, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-29 03:26:50,369 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 35, Rollout Depth: 30
+2025-05-29 03:26:50,369 - INFO - Avg Reward: 427.00 +/- 88.75 (over 5 episodes)
+2025-05-29 03:26:50,369 - INFO - Individual Rewards: [415.0, 500.0, 500.0, 459.0, 261.0]
+2025-05-29 03:26:50,369 - INFO - Total search time for all episodes: 256.7707 seconds
+2025-05-29 03:26:50,369 - INFO - Average search time per move: 0.1203 seconds (std: 0.0601 seconds)
+2025-05-29 03:26:50,369 - INFO - --- Finished Config 36/42 ---
+
+
+2025-05-29 03:26:50,369 - INFO - --- Running Config 37/42: Sim/move=55, RolloutDepth=5 ---
+2025-05-29 03:26:50,369 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 55, Rollout Depth: 5, Workers: 1, Seed: 42
+2025-05-29 03:31:54,287 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 55, Rollout Depth: 5
+2025-05-29 03:31:54,287 - INFO - Avg Reward: 365.80 +/- 104.14 (over 5 episodes)
+2025-05-29 03:31:54,287 - INFO - Individual Rewards: [500.0, 406.0, 357.0, 181.0, 385.0]
+2025-05-29 03:31:54,287 - INFO - Total search time for all episodes: 303.8952 seconds
+2025-05-29 03:31:54,287 - INFO - Average search time per move: 0.1662 seconds (std: 0.0871 seconds)
+2025-05-29 03:31:54,287 - INFO - --- Finished Config 37/42 ---
+
+
+2025-05-29 03:31:54,287 - INFO - --- Running Config 38/42: Sim/move=55, RolloutDepth=10 ---
+2025-05-29 03:31:54,287 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 55, Rollout Depth: 10, Workers: 1, Seed: 42
+2025-05-29 03:40:11,666 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 55, Rollout Depth: 10
+2025-05-29 03:40:11,666 - INFO - Avg Reward: 492.20 +/- 15.60 (over 5 episodes)
+2025-05-29 03:40:11,666 - INFO - Individual Rewards: [500.0, 461.0, 500.0, 500.0, 500.0]
+2025-05-29 03:40:11,666 - INFO - Total search time for all episodes: 497.3485 seconds
+2025-05-29 03:40:11,666 - INFO - Average search time per move: 0.2021 seconds (std: 0.0993 seconds)
+2025-05-29 03:40:11,666 - INFO - --- Finished Config 38/42 ---
+
+
+2025-05-29 03:40:11,666 - INFO - --- Running Config 39/42: Sim/move=55, RolloutDepth=15 ---
+2025-05-29 03:40:11,666 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 55, Rollout Depth: 15, Workers: 1, Seed: 42
+2025-05-29 03:48:50,299 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 55, Rollout Depth: 15
+2025-05-29 03:48:50,299 - INFO - Avg Reward: 500.00 +/- 0.00 (over 5 episodes)
+2025-05-29 03:48:50,299 - INFO - Individual Rewards: [500.0, 500.0, 500.0, 500.0, 500.0]
+2025-05-29 03:48:50,299 - INFO - Total search time for all episodes: 518.6010 seconds
+2025-05-29 03:48:50,299 - INFO - Average search time per move: 0.2074 seconds (std: 0.1006 seconds)
+2025-05-29 03:48:50,299 - INFO - --- Finished Config 39/42 ---
+
+
+2025-05-29 03:48:50,299 - INFO - --- Running Config 40/42: Sim/move=55, RolloutDepth=20 ---
+2025-05-29 03:48:50,299 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 55, Rollout Depth: 20, Workers: 1, Seed: 42
+2025-05-29 03:55:33,911 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 55, Rollout Depth: 20
+2025-05-29 03:55:33,911 - INFO - Avg Reward: 429.00 +/- 82.76 (over 5 episodes)
+2025-05-29 03:55:33,911 - INFO - Individual Rewards: [487.0, 349.0, 500.0, 500.0, 309.0]
+2025-05-29 03:55:33,911 - INFO - Total search time for all episodes: 403.5846 seconds
+2025-05-29 03:55:33,911 - INFO - Average search time per move: 0.1882 seconds (std: 0.0942 seconds)
+2025-05-29 03:55:33,911 - INFO - --- Finished Config 40/42 ---
+
+
+2025-05-29 03:55:33,911 - INFO - --- Running Config 41/42: Sim/move=55, RolloutDepth=25 ---
+2025-05-29 03:55:33,911 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 55, Rollout Depth: 25, Workers: 1, Seed: 42
+2025-05-29 04:02:20,316 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 55, Rollout Depth: 25
+2025-05-29 04:02:20,316 - INFO - Avg Reward: 428.80 +/- 86.78 (over 5 episodes)
+2025-05-29 04:02:20,316 - INFO - Individual Rewards: [419.0, 500.0, 500.0, 459.0, 266.0]
+2025-05-29 04:02:20,316 - INFO - Total search time for all episodes: 406.3777 seconds
+2025-05-29 04:02:20,316 - INFO - Average search time per move: 0.1895 seconds (std: 0.0943 seconds)
+2025-05-29 04:02:20,316 - INFO - --- Finished Config 41/42 ---
+
+
+2025-05-29 04:02:20,316 - INFO - --- Running Config 42/42: Sim/move=55, RolloutDepth=30 ---
+2025-05-29 04:02:20,316 - INFO - Evaluating MCTS on CartPole-v1: 5 episodes, Sim/move: 55, Rollout Depth: 30, Workers: 1, Seed: 42
+2025-05-29 04:09:16,726 - INFO - Finished evaluation for CartPole-v1 with Sim/move: 55, Rollout Depth: 30
+2025-05-29 04:09:16,726 - INFO - Avg Reward: 441.80 +/- 38.96 (over 5 episodes)
+2025-05-29 04:09:16,727 - INFO - Individual Rewards: [434.0, 500.0, 464.0, 428.0, 383.0]
+2025-05-29 04:09:16,727 - INFO - Total search time for all episodes: 416.3826 seconds
+2025-05-29 04:09:16,727 - INFO - Average search time per move: 0.1885 seconds (std: 0.0893 seconds)
+2025-05-29 04:09:16,727 - INFO - --- Finished Config 42/42 ---
+
+
+2025-05-29 04:09:16,727 - INFO - 
+
+--- Experiment Finished: Summary of Results ---
+===================================================================================
+Sim/Move     | Rollout Depth   | Avg Reward      | Std Reward      | All Rewards
+-----------------------------------------------------------------------------------
+1            | 5               | 19.40           | 11.38           | 10.0, 18.0, 10.0, 18.0, 41.0 
+1            | 10              | 17.60           | 4.63            | 18.0, 25.0, 19.0, 15.0, 11.0 
+1            | 15              | 16.40           | 2.87            | 21.0, 13.0, 18.0, 14.0, 16.0 
+1            | 20              | 17.80           | 5.19            | 12.0, 23.0, 15.0, 25.0, 14.0 
+1            | 25              | 29.00           | 6.07            | 21.0, 29.0, 25.0, 39.0, 31.0 
+1            | 30              | 27.20           | 15.99           | 22.0, 57.0, 28.0, 19.0, 10.0 
+2            | 5               | 17.80           | 11.32           | 40.0, 10.0, 13.0, 16.0, 10.0 
+2            | 10              | 29.00           | 14.89           | 10.0, 36.0, 18.0, 28.0, 53.0 
+2            | 15              | 19.40           | 9.65            | 15.0, 10.0, 11.0, 26.0, 35.0 
+2            | 20              | 27.40           | 13.46           | 14.0, 21.0, 22.0, 27.0, 53.0 
+2            | 25              | 23.20           | 11.60           | 45.0, 23.0, 12.0, 21.0, 15.0 
+2            | 30              | 25.40           | 9.93            | 9.0, 33.0, 24.0, 38.0, 23.0 
+5            | 5               | 275.00          | 99.92           | 314.0, 207.0, 357.0, 382.0, 115.0 
+5            | 10              | 341.60          | 129.33          | 202.0, 194.0, 473.0, 339.0, 500.0 
+5            | 15              | 361.60          | 129.92          | 500.0, 386.0, 203.0, 500.0, 219.0 
+5            | 20              | 299.40          | 106.65          | 269.0, 500.0, 297.0, 244.0, 187.0 
+5            | 25              | 277.40          | 98.78           | 243.0, 427.0, 169.0, 356.0, 192.0 
+5            | 30              | 332.00          | 95.16           | 343.0, 225.0, 334.0, 500.0, 258.0 
+10           | 5               | 374.60          | 104.69          | 359.0, 187.0, 500.0, 431.0, 396.0 
+10           | 10              | 428.80          | 87.39           | 500.0, 313.0, 331.0, 500.0, 500.0 
+10           | 15              | 433.80          | 81.22           | 500.0, 327.0, 500.0, 500.0, 342.0 
+10           | 20              | 431.40          | 117.78          | 500.0, 198.0, 500.0, 459.0, 500.0 
+10           | 25              | 353.40          | 97.74           | 227.0, 407.0, 365.0, 268.0, 500.0 
+10           | 30              | 361.60          | 116.68          | 500.0, 303.0, 288.0, 217.0, 500.0 
+20           | 5               | 403.00          | 62.05           | 355.0, 336.0, 500.0, 374.0, 450.0 
+20           | 10              | 500.00          | 0.00            | 500.0, 500.0, 500.0, 500.0, 500.0 
+20           | 15              | 438.60          | 95.28           | 500.0, 500.0, 439.0, 254.0, 500.0 
+20           | 20              | 452.20          | 66.39           | 500.0, 500.0, 430.0, 500.0, 331.0 
+20           | 25              | 417.60          | 85.77           | 396.0, 500.0, 425.0, 500.0, 267.0 
+20           | 30              | 394.20          | 59.71           | 342.0, 386.0, 334.0, 409.0, 500.0 
+35           | 5               | 295.00          | 121.76          | 323.0, 500.0, 176.0, 165.0, 311.0 
+35           | 10              | 500.00          | 0.00            | 500.0, 500.0, 500.0, 500.0, 500.0 
+35           | 15              | 495.60          | 8.80            | 478.0, 500.0, 500.0, 500.0, 500.0 
+35           | 20              | 500.00          | 0.00            | 500.0, 500.0, 500.0, 500.0, 500.0 
+35           | 25              | 439.60          | 96.45           | 500.0, 248.0, 475.0, 475.0, 500.0 
+35           | 30              | 427.00          | 88.75           | 415.0, 500.0, 500.0, 459.0, 261.0 
+55           | 5               | 365.80          | 104.14          | 500.0, 406.0, 357.0, 181.0, 385.0 
+55           | 10              | 492.20          | 15.60           | 500.0, 461.0, 500.0, 500.0, 500.0 
+55           | 15              | 500.00          | 0.00            | 500.0, 500.0, 500.0, 500.0, 500.0 
+55           | 20              | 429.00          | 82.76           | 487.0, 349.0, 500.0, 500.0, 309.0 
+55           | 25              | 428.80          | 86.78           | 419.0, 500.0, 500.0, 459.0, 266.0 
+55           | 30              | 441.80          | 38.96           | 434.0, 500.0, 464.0, 428.0, 383.0 
+===================================================================================
+===================================================================================
+Sim/Move     | Rollout Depth   | Avg Search Time | Search Time Std
+-----------------------------------------------------------------------------------
+1            | 5               | 0.0006          | 0.0002         
+1            | 10              | 0.0006          | 0.0001         
+1            | 15              | 0.0006          | 0.0001         
+1            | 20              | 0.0006          | 0.0002         
+1            | 25              | 0.0007          | 0.0001         
+1            | 30              | 0.0008          | 0.0002         
+2            | 5               | 0.0012          | 0.0003         
+2            | 10              | 0.0015          | 0.0004         
+2            | 15              | 0.0013          | 0.0003         
+2            | 20              | 0.0014          | 0.0004         
+2            | 25              | 0.0014          | 0.0004         
+2            | 30              | 0.0014          | 0.0003         
+5            | 5               | 0.0123          | 0.0065         
+5            | 10              | 0.0150          | 0.0085         
+5            | 15              | 0.0157          | 0.0087         
+5            | 20              | 0.0134          | 0.0075         
+5            | 25              | 0.0127          | 0.0068         
+5            | 30              | 0.0142          | 0.0075         
+10           | 5               | 0.0303          | 0.0161         
+10           | 10              | 0.0335          | 0.0174         
+10           | 15              | 0.0340          | 0.0174         
+10           | 20              | 0.0351          | 0.0181         
+10           | 25              | 0.0299          | 0.0155         
+10           | 30              | 0.0312          | 0.0169         
+20           | 5               | 0.0624          | 0.0316         
+20           | 10              | 0.0744          | 0.0367         
+20           | 15              | 0.0699          | 0.0362         
+20           | 20              | 0.0704          | 0.0349         
+20           | 25              | 0.0674          | 0.0337         
+20           | 30              | 0.0632          | 0.0310         
+35           | 5               | 0.0942          | 0.0547         
+35           | 10              | 0.1302          | 0.0642         
+35           | 15              | 0.1302          | 0.0636         
+35           | 20              | 0.1321          | 0.0641         
+35           | 25              | 0.1235          | 0.0621         
+35           | 30              | 0.1203          | 0.0601         
+55           | 5               | 0.1662          | 0.0871         
+55           | 10              | 0.2021          | 0.0993         
+55           | 15              | 0.2074          | 0.1006         
+55           | 20              | 0.1882          | 0.0942         
+55           | 25              | 0.1895          | 0.0943         
+55           | 30              | 0.1885          | 0.0893         
+===================================================================================
+2025-05-29 04:09:16,727 - INFO - Experiment results printed above. Now plotting...
+2025-05-29 04:09:17,514 - INFO - Experiment script finished.

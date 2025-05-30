@@ -1,0 +1,6 @@
+nohup: ignoring input
+2025-05-29 14:09:01,295 - INFO - Starting MCTS evaluation on ALE/Alien-v5 with 1 worker(s).
+2025-05-29 14:09:01,295 - INFO - Initializing MCTS agent for ALE/Alien-v5...
+A.L.E: Arcade Learning Environment (version 0.11.0+dfae0bd)
+[Powered by Stella]
+2025-05-29 14:09:01,851 - INFO - Starting evaluation for 5 episodes on ALE/Alien-v5...

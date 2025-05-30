@@ -1,0 +1,6 @@
+nohup: ignoring input
+2025-05-29 14:09:49,810 - INFO - Starting MCTS evaluation on ALE/Boxing-v5 with 1 worker(s).
+2025-05-29 14:09:49,810 - INFO - Initializing MCTS agent for ALE/Boxing-v5...
+A.L.E: Arcade Learning Environment (version 0.11.0+dfae0bd)
+[Powered by Stella]
+2025-05-29 14:09:50,388 - INFO - Starting evaluation for 5 episodes on ALE/Boxing-v5...

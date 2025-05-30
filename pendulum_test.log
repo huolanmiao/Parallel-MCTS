@@ -1,0 +1,11 @@
+nohup: ignoring input
+2025-05-29 06:14:35,243 - INFO - Starting MCTS evaluation on Pendulum-v1 with 1 worker(s).
+2025-05-29 06:14:35,243 - INFO - Initializing MCTS agent for Pendulum-v1...
+Traceback (most recent call last):
+  File "/root/.jupyter/pengyu/Parallel_MCTS/MCTS_basic.py", line 375, in <module>
+    evaluate_mcts_on_env(
+  File "/root/.jupyter/pengyu/Parallel_MCTS/MCTS_basic.py", line 287, in evaluate_mcts_on_env
+    mcts_agent = MCTS_Parallel_Simulations(env_name, 
+  File "/root/.jupyter/pengyu/Parallel_MCTS/MCTS_basic.py", line 129, in __init__
+    raise ValueError("MCTS currently supports Discrete action spaces only.")
+ValueError: MCTS currently supports Discrete action spaces only.

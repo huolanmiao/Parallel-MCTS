@@ -1,0 +1,9 @@
+nohup: ignoring input
+2025-05-29 03:16:56,803 - INFO - Starting MCTS evaluation on MountainCar-v0 with 1 worker(s).
+2025-05-29 03:16:56,804 - INFO - Initializing MCTS agent for MountainCar-v0...
+/root/anaconda3/envs/py310/lib/python3.10/site-packages/gymnasium/wrappers/rendering.py:283: UserWarning: [33mWARN: Overwriting existing videos at /root/.jupyter/pengyu/Parallel_MCTS/MountainCar-v0-agent folder (try specifying a different `video_folder` for the `RecordVideo` wrapper if this is not desired)[0m
+  logger.warn(
+2025-05-29 03:16:57,056 - INFO - Starting evaluation for 5 episodes on MountainCar-v0...
+error: XDG_RUNTIME_DIR not set in the environment.
+2025-05-29 04:42:33,120 - INFO - Episode 1 finished after 200 steps. Reward: -200.0
+2025-05-29 06:08:26,888 - INFO - Episode 2 finished after 200 steps. Reward: -200.0

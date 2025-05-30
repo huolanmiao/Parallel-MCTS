@@ -1,0 +1,8 @@
+nohup: ignoring input
+2025-05-29 14:08:51,013 - INFO - Starting MCTS evaluation on ALE/Breakout-v5 with 1 worker(s).
+2025-05-29 14:08:51,013 - INFO - Initializing MCTS agent for ALE/Breakout-v5...
+A.L.E: Arcade Learning Environment (version 0.11.0+dfae0bd)
+[Powered by Stella]
+/root/anaconda3/envs/py310/lib/python3.10/site-packages/gymnasium/wrappers/rendering.py:283: UserWarning: [33mWARN: Overwriting existing videos at /root/.jupyter/pengyu/Parallel_MCTS/ALE/Breakout-v5-agent folder (try specifying a different `video_folder` for the `RecordVideo` wrapper if this is not desired)[0m
+  logger.warn(
+2025-05-29 14:08:51,560 - INFO - Starting evaluation for 5 episodes on ALE/Breakout-v5...

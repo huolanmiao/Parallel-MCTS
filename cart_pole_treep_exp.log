@@ -1,0 +1,23 @@
+nohup: ignoring input
+2025-05-30 03:06:23,751 - INFO - Starting MCTS search time experiments on CartPole-v1
+2025-05-30 03:06:23,752 - INFO - Worker options: [1, 2]
+2025-05-30 03:06:23,752 - INFO - Simulations per move options: [50, 100]
+2025-05-30 03:06:23,752 - INFO - Episodes per setting: 5, Rollout depth: 15
+
+
+2025-05-30 03:06:23,752 - INFO - 
+------------- Running Experiment 1/4 ----------------------------------
+2025-05-30 03:06:23,752 - INFO - Initializing MCTS agent for CartPole-v1...
+2025-05-30 03:06:23,754 - INFO - Starting evaluation for 5 episodes on CartPole-v1...
+2025-05-30 03:07:05,011 - INFO - Episode 1 finished after 322 steps. Reward: 322.0
+2025-05-30 03:08:37,632 - INFO - Episode 2 finished after 500 steps. Reward: 500.0
+2025-05-30 03:10:10,411 - INFO - Episode 3 finished after 500 steps. Reward: 500.0
+2025-05-30 03:11:06,139 - INFO - Episode 4 finished after 381 steps. Reward: 381.0
+2025-05-30 03:12:02,931 - INFO - Episode 5 finished after 384 steps. Reward: 384.0
+2025-05-30 03:12:02,932 - INFO - Avg Reward: 417.40, Std Reward: 70.97
+Traceback (most recent call last):
+  File "/root/.jupyter/pengyu/Parallel_MCTS/MCTS_treep_experiment.py", line 490, in <module>
+    avg_r, std_r, all_rewards, avg_search_t, std_search_t = evaluate_mcts_on_env(
+  File "/root/.jupyter/pengyu/Parallel_MCTS/MCTS_treep_experiment.py", line 356, in evaluate_mcts_on_env
+    logger.info(f"Avg Search Time/Move: {avg_search_time_per_move:.4f}s, Std Search Time: {std_search_time_per_move:.4f}s\n")
+NameError: name 'avg_search_time_per_move' is not defined. Did you mean: 'search_time_per_move'?
