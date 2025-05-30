@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 # Helper function for multiprocessing pool.
 def _simulate_rollout_task(env_name, task_data,
                            rollout_depth_limit, possible_actions_indices,
-                           worker_seed, gamma=0.95):
+                           worker_seed, random_seed, gamma=0.95):
     """
     Performs a random rollout from a given state for a worker process.
     task_data can be:
@@ -216,48 +216,44 @@ class MCTS_Parallel_Simulations:
         num_total_simulations_for_this_move = self.num_simulation 
 
         while simulations_done < num_total_simulations_for_this_move:
-            num_to_batch = self.num_workers if self.pool else 1
+            num_to_batch = self.num_workers
             actual_batch_size = min(num_to_batch, num_total_simulations_for_this_move - simulations_done)
             
 
             batch_simulation_tasks_data = [] # Holds (node_for_bp, task_args_for_pool)
             
-            for i in range(actual_batch_size):
-                promising_node = self._select_promising_node(root_node)
-                node_to_evaluate = promising_node
-
-                if not promising_node.is_terminal:
-                    node_to_evaluate = self._expand_node(promising_node, seed)
-                
-                # If after selection/expansion, the node is terminal, backpropagate its intrinsic reward
-                if node_to_evaluate.is_terminal:
-                    self._backpropagate(node_to_evaluate, node_to_evaluate.reward_at_node) # Or 0 if terminal means end of game with no further reward
-                    simulations_done += 1
-                else:
-                    # Prepare data for parallel simulation task
-                    task_data_for_worker = (node_to_evaluate.action_sequence_from_root, root_node.observation)
-                    
-                    worker_seed = seed
-
-                    task_args = (self.env_name, task_data_for_worker,
-                                 self.rollout_depth, self.possible_actions_indices, worker_seed)
-                    # print(f"Preparing task for worker {i + 1}/{actual_batch_size} with seed {worker_seed} for action {node_to_evaluate.action_that_led_here} that lead to node {node_to_evaluate.observation} (terminal: {node_to_evaluate.is_terminal})")
-                    batch_simulation_tasks_data.append({'node_for_bp': node_to_evaluate, 'task_args': task_args})
+            promising_node = self._select_promising_node(root_node)
+            node_to_evaluate = promising_node
+            # print(f"promising node: {promising_node.action_sequence_from_root}")
+            if not promising_node.is_terminal:
+                node_to_evaluate = self._expand_node(promising_node, seed)
             
-            if not batch_simulation_tasks_data: # All paths in batch led to terminal or failed expansions
-                if simulations_done >= num_total_simulations_for_this_move: break
-                else: continue # Try another batch if budget remains
-
+            # If after selection/expansion, the node is terminal, backpropagate its intrinsic reward
+            if node_to_evaluate.is_terminal:
+                self._backpropagate(node_to_evaluate, node_to_evaluate.reward_at_node) # Or 0 if terminal means end of game with no further reward
+                simulations_done += 1
+                continue # No need to simulate rollouts for terminal nodes
+            
+            task_data_for_worker = (node_to_evaluate.action_sequence_from_root, root_node.observation)            
+            worker_seed = seed
+            # change seed for each task to ensure diverse rollouts
+            batch_simulation_tasks_data = [(self.env_name, task_data_for_worker,
+                            self.rollout_depth, self.possible_actions_indices, worker_seed, seed) for seed in range(worker_seed, worker_seed + actual_batch_size)]
+            
             rollout_rewards = []
-            if self.pool:
-                pool_tasks = [item['task_args'] for item in batch_simulation_tasks_data]
-                rollout_rewards = self.pool.starmap(_simulate_rollout_task, pool_tasks)
+            if self.pool:                
+                rollout_rewards = self.pool.starmap(_simulate_rollout_task, batch_simulation_tasks_data)
             else:
-                for item in batch_simulation_tasks_data:
-                    rollout_rewards.append(_simulate_rollout_task(*item['task_args']))
+                for task_args in batch_simulation_tasks_data:
+                    rollout_rewards.append(_simulate_rollout_task(*task_args))
             
-            for i, item in enumerate(batch_simulation_tasks_data):
-                self._backpropagate(item['node_for_bp'], rollout_rewards[i])
+            # Backpropagate the rewards from the rollouts
+            mean_rollout_reward = np.mean(rollout_rewards)
+            std_rollout_reward = np.std(rollout_rewards)
+            # if std_rollout_reward != 0:
+            #     print(f"Mean Rollout Reward: {mean_rollout_reward:.2f}, Std Dev: {std_rollout_reward:.2f}")
+            self._backpropagate(node_to_evaluate, mean_rollout_reward)
+            
             simulations_done += len(batch_simulation_tasks_data)
 
 
@@ -298,7 +294,7 @@ def evaluate_mcts_on_env(env_name, num_episodes=10, rollout_depth=10, simulation
         env = RecordVideo(env, video_folder=f"{env_name}-agent", name_prefix="eval",
                     episode_trigger=lambda x: True)
         env = RecordEpisodeStatistics(env, buffer_length=num_episodes)
-
+        
     total_rewards_all_episodes = []
 
     # Collect time for each search
@@ -356,8 +352,6 @@ def evaluate_mcts_on_env(env_name, num_episodes=10, rollout_depth=10, simulation
     logger.info(f"Avg Search Time/Move: {avg_search_time_per_move:.4f}s, Std Search Time: {std_search_time_per_move:.4f}s\n")
     
     return avg_reward, std_reward, total_rewards_all_episodes, avg_search_time_per_move, std_search_time_per_move
-
-
 
 def plot_experiment_data(results_list, env_name,
                          fixed_line_param_config,
@@ -441,7 +435,7 @@ def plot_experiment_data(results_list, env_name,
     safe_y_label_for_fname = y_axis_label.replace(' ', '_').replace('/', '_').replace('(', '').replace(')', '')
     safe_fixed_param_name = fixed_param_display_name.replace(' ', '_')
 
-    filename = f"TreeP_{safe_env_name}_plot_X_{safe_varying_param_name}_Y_{safe_y_label_for_fname}_lines_{safe_fixed_param_name}.png"
+    filename = f"{safe_env_name}_plot_X_{safe_varying_param_name}_Y_{safe_y_label_for_fname}_lines_{safe_fixed_param_name}.png"
     plt.savefig(filename)
     logger.info(f"Plot saved as {filename}")
     # plt.show() # 在脚本中通常注释掉
@@ -449,19 +443,22 @@ def plot_experiment_data(results_list, env_name,
     
 if __name__ == '__main__':
     random.seed(42) 
-    SELECTED_ENV_NAME = 'CartPole-v1'
-    
+    # --- Configuration for Evaluation ---
+    # ATARI_ENV_NAME = 'ALE/Pong-v5'
+    ATARI_ENV_NAME = 'ALE/Breakout-v5' 
+    SELECTED_ENV_NAME = 'CartPole-v1' # A simple environment for testing non-Atari compatibility
+
     # Experiment Parameters
     NUM_EPISODES_FOR_EXPERIMENT = 5  # Keep low for faster experiments
     ROLLOUT_DEPTH_FOR_EXPERIMENT = 15 # MCTS internal rollout depth
 
-    simulations_options = [50, 100, 200, 400, 600, 1000] # SIMULATIONS_PER_MOVE    
-    worker_options = [1, 2, 3, 4, 5, 6] # Number of MCTS workers to test
+    # simulations_options = [50, 100, 200, 400, 600, 1000] # SIMULATIONS_PER_MOVE    
+    # worker_options = [1, 2, 4, 8, 16, 32] # Number of MCTS workers to test
     
     # DEGUB
-    # simulations_options = [50, 100] # SIMULATIONS_PER_MOVE    
-    # worker_options = [1, 2] # Number of MCTS workers to test
-
+    simulations_options = [50, 100] # SIMULATIONS_PER_MOVE    
+    worker_options = [1, 2] # Number of MCTS workers to test
+    # --------------------------------------
 
     logger.info(f"Starting MCTS search time experiments on {SELECTED_ENV_NAME}")
     logger.info(f"Worker options: {worker_options}")
@@ -584,4 +581,5 @@ if __name__ == '__main__':
     )
     
     logger.info("Experiment run and plotting complete. Check for .png files for graphs.")
-    # nohup python MCTS_treep_experiment.py > cart_pole_treep_exp.log 2>&1 &
+    # nohup python MCTS_leafp_experiment.py > cart_pole_leafp_exp.log 2>&1 &
+

@@ -197,8 +197,8 @@ class MCTS_Parallel_Simulations:
             # The reward backpropagated should be the future rewards (rollout)
             # The immediate reward for reaching current_node is stored in current_node.reward_at_node
             # Standard MCTS backpropagates the outcome of the playout.
-            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
             current_node.wins += cur_value_estimation
+            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
             current_node = current_node.parent
 
     def search(self, current_observation, current_info, is_current_state_terminated, is_current_state_truncated, history_actions, seed, reuse_tree=False): 

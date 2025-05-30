@@ -184,8 +184,25 @@ class MCTS_Parallel_Simulations:
             # The reward backpropagated should be the future rewards (rollout)
             # The immediate reward for reaching current_node is stored in current_node.reward_at_node
             # Standard MCTS backpropagates the outcome of the playout.
-            current_node.wins += cur_value_estimation
             cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
+            current_node.wins += cur_value_estimation
+            current_node = current_node.parent
+            
+    def _backpropagate_N(self, node):
+        current_node = node
+        while current_node is not None:
+            current_node.visits += 1
+            current_node = current_node.parent
+
+    def _backpropagate_Q(self, node, reward_from_rollout, gamma=0.95):
+        current_node = node
+        cur_value_estimation = reward_from_rollout
+        while current_node is not None:
+            # The reward backpropagated should be the future rewards (rollout)
+            # The immediate reward for reaching current_node is stored in current_node.reward_at_node
+            # Standard MCTS backpropagates the outcome of the playout.
+            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
+            current_node.wins += cur_value_estimation
             current_node = current_node.parent
 
     def search(self, current_observation, current_info, is_current_state_terminated, is_current_state_truncated, history_actions, seed, reuse_tree=False): 
@@ -234,6 +251,7 @@ class MCTS_Parallel_Simulations:
                     self._backpropagate(node_to_evaluate, node_to_evaluate.reward_at_node) # Or 0 if terminal means end of game with no further reward
                     simulations_done += 1
                 else:
+                    self._backpropagate_N(node_to_evaluate)
                     # Prepare data for parallel simulation task
                     task_data_for_worker = (node_to_evaluate.action_sequence_from_root, root_node.observation)
                     
@@ -257,7 +275,7 @@ class MCTS_Parallel_Simulations:
                     rollout_rewards.append(_simulate_rollout_task(*item['task_args']))
             
             for i, item in enumerate(batch_simulation_tasks_data):
-                self._backpropagate(item['node_for_bp'], rollout_rewards[i])
+                self._backpropagate_Q(item['node_for_bp'], rollout_rewards[i])
             simulations_done += len(batch_simulation_tasks_data)
 
 
@@ -357,8 +375,6 @@ def evaluate_mcts_on_env(env_name, num_episodes=10, rollout_depth=10, simulation
     
     return avg_reward, std_reward, total_rewards_all_episodes, avg_search_time_per_move, std_search_time_per_move
 
-
-
 def plot_experiment_data(results_list, env_name,
                          fixed_line_param_config,
                          varying_x_axis_param_config,
@@ -441,7 +457,7 @@ def plot_experiment_data(results_list, env_name,
     safe_y_label_for_fname = y_axis_label.replace(' ', '_').replace('/', '_').replace('(', '').replace(')', '')
     safe_fixed_param_name = fixed_param_display_name.replace(' ', '_')
 
-    filename = f"TreeP_{safe_env_name}_plot_X_{safe_varying_param_name}_Y_{safe_y_label_for_fname}_lines_{safe_fixed_param_name}.png"
+    filename = f"{safe_env_name}_plot_X_{safe_varying_param_name}_Y_{safe_y_label_for_fname}_lines_{safe_fixed_param_name}.png"
     plt.savefig(filename)
     logger.info(f"Plot saved as {filename}")
     # plt.show() # 在脚本中通常注释掉
@@ -449,19 +465,22 @@ def plot_experiment_data(results_list, env_name,
     
 if __name__ == '__main__':
     random.seed(42) 
-    SELECTED_ENV_NAME = 'CartPole-v1'
-    
+    # --- Configuration for Evaluation ---
+    # ATARI_ENV_NAME = 'ALE/Pong-v5'
+    ATARI_ENV_NAME = 'ALE/Breakout-v5' 
+    SELECTED_ENV_NAME = 'CartPole-v1' # A simple environment for testing non-Atari compatibility
+
     # Experiment Parameters
     NUM_EPISODES_FOR_EXPERIMENT = 5  # Keep low for faster experiments
     ROLLOUT_DEPTH_FOR_EXPERIMENT = 15 # MCTS internal rollout depth
 
-    simulations_options = [50, 100, 200, 400, 600, 1000] # SIMULATIONS_PER_MOVE    
-    worker_options = [1, 2, 3, 4, 5, 6] # Number of MCTS workers to test
+    # simulations_options = [50, 100, 200, 400, 600, 1000] # SIMULATIONS_PER_MOVE    
+    # worker_options = [1, 2, 4, 8, 16, 32] # Number of MCTS workers to test
     
     # DEGUB
-    # simulations_options = [50, 100] # SIMULATIONS_PER_MOVE    
-    # worker_options = [1, 2] # Number of MCTS workers to test
-
+    simulations_options = [50, 100] # SIMULATIONS_PER_MOVE    
+    worker_options = [1, 2] # Number of MCTS workers to test
+    # --------------------------------------
 
     logger.info(f"Starting MCTS search time experiments on {SELECTED_ENV_NAME}")
     logger.info(f"Worker options: {worker_options}")
@@ -584,4 +603,5 @@ if __name__ == '__main__':
     )
     
     logger.info("Experiment run and plotting complete. Check for .png files for graphs.")
-    # nohup python MCTS_treep_experiment.py > cart_pole_treep_exp.log 2>&1 &
+    # nohup python MCTS_wuuct_experiment.py > cart_pole_wuuct_exp.log 2>&1 &
+

@@ -183,8 +183,8 @@ class MCTS_Parallel_Simulations:
             # The reward backpropagated should be the future rewards (rollout)
             # The immediate reward for reaching current_node is stored in current_node.reward_at_node
             # Standard MCTS backpropagates the outcome of the playout.
-            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
             current_node.wins += cur_value_estimation
+            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
             current_node = current_node.parent
 
     def search(self, current_observation, current_info, is_current_state_terminated, is_current_state_truncated, history_actions, seed, reuse_tree=False): 
@@ -223,7 +223,7 @@ class MCTS_Parallel_Simulations:
             
             promising_node = self._select_promising_node(root_node)
             node_to_evaluate = promising_node
-
+            # print(f"promising node: {promising_node.action_sequence_from_root}")
             if not promising_node.is_terminal:
                 node_to_evaluate = self._expand_node(promising_node, seed)
             
@@ -232,7 +232,7 @@ class MCTS_Parallel_Simulations:
                 self._backpropagate(node_to_evaluate, node_to_evaluate.reward_at_node) # Or 0 if terminal means end of game with no further reward
                 simulations_done += 1
                 continue # No need to simulate rollouts for terminal nodes
-                
+            
             task_data_for_worker = (node_to_evaluate.action_sequence_from_root, root_node.observation)            
             worker_seed = seed
             # change seed for each task to ensure diverse rollouts
@@ -249,7 +249,8 @@ class MCTS_Parallel_Simulations:
             # Backpropagate the rewards from the rollouts
             mean_rollout_reward = np.mean(rollout_rewards)
             std_rollout_reward = np.std(rollout_rewards)
-            print(f"Mean Rollout Reward: {mean_rollout_reward:.2f}, Std Dev: {std_rollout_reward:.2f}")
+            if std_rollout_reward != 0:
+                print(f"Mean Rollout Reward: {mean_rollout_reward:.2f}, Std Dev: {std_rollout_reward:.2f}")
             self._backpropagate(node_to_evaluate, mean_rollout_reward)
             
             simulations_done += len(batch_simulation_tasks_data)
@@ -370,9 +371,9 @@ if __name__ == '__main__':
 
     NUM_EPISODES_TO_RUN = 5
     SIMULATIONS_PER_MOVE = 100 # Budget for MCTS search (number of tree traversals/sims)
-    ROLLOUT_DEPTH_MCTS = 100 # Max depth for random rollouts within each simulation 
-    # NUM_MCTS_WORKERS = cpu_count() // 2 if cpu_count() > 1 else 0 # Use half cores or run serially
-    NUM_MCTS_WORKERS = 1
+    ROLLOUT_DEPTH_MCTS = 15 # Max depth for random rollouts within each simulation 
+    NUM_MCTS_WORKERS = cpu_count() // 2 if cpu_count() > 1 else 0 # Use half cores or run serially
+    # NUM_MCTS_WORKERS = 1
     RENDER_GAME = True
 
     logger.info(f"Starting MCTS evaluation on {SELECTED_ENV_NAME} with {NUM_MCTS_WORKERS} worker(s).")

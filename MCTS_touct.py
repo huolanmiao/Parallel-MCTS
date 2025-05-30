@@ -8,7 +8,6 @@ import logging
 import gymnasium as gym
 from gymnasium.wrappers import RecordEpisodeStatistics, RecordVideo
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -80,6 +79,7 @@ class Node:
         self.wins = 0.0
         self.visits = 0
         self.C = ucb_exploration_const
+        self.trust_observed_Q = 0.0 # For N-Q trust backpropagation
 
         # State information (one of these will be primarily used based on cloning_method)
         self.observation = observation
@@ -183,9 +183,29 @@ class MCTS_Parallel_Simulations:
             current_node.visits += 1
             # The reward backpropagated should be the future rewards (rollout)
             # The immediate reward for reaching current_node is stored in current_node.reward_at_node
-            # Standard MCTS backpropagates the outcome of the playout.
+            # Standard MCTS backpropagates the outcome of the playout.            
             current_node.wins += cur_value_estimation
             cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
+            current_node = current_node.parent
+            
+    def _backpropagate_N_Q_trust(self, node, gamma=0.95):
+        current_node = node
+        trust_observed_Q = node.wins / node.visits if node.visits > 0 else 0.0
+        node.trust_observed_Q = trust_observed_Q
+        cur_value_estimation = trust_observed_Q
+        while current_node is not None:
+            current_node.visits += 1
+            current_node.wins += cur_value_estimation
+            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation             
+            current_node = current_node.parent
+
+    def _backpropagate_Q_update(self, node, reward_from_rollout, gamma=0.95):
+        current_node = node
+        trust_observed_Q = node.trust_observed_Q
+        cur_value_update = reward_from_rollout - trust_observed_Q
+        while current_node is not None:
+            current_node.wins += cur_value_update
+            cur_value_update = gamma * cur_value_update
             current_node = current_node.parent
 
     def search(self, current_observation, current_info, is_current_state_terminated, is_current_state_truncated, history_actions, seed, reuse_tree=False): 
@@ -234,6 +254,7 @@ class MCTS_Parallel_Simulations:
                     self._backpropagate(node_to_evaluate, node_to_evaluate.reward_at_node) # Or 0 if terminal means end of game with no further reward
                     simulations_done += 1
                 else:
+                    self._backpropagate_N_Q_trust(node_to_evaluate)
                     # Prepare data for parallel simulation task
                     task_data_for_worker = (node_to_evaluate.action_sequence_from_root, root_node.observation)
                     
@@ -257,7 +278,7 @@ class MCTS_Parallel_Simulations:
                     rollout_rewards.append(_simulate_rollout_task(*item['task_args']))
             
             for i, item in enumerate(batch_simulation_tasks_data):
-                self._backpropagate(item['node_for_bp'], rollout_rewards[i])
+                self._backpropagate_Q_update(item['node_for_bp'], rollout_rewards[i])
             simulations_done += len(batch_simulation_tasks_data)
 
 
@@ -294,10 +315,9 @@ def evaluate_mcts_on_env(env_name, num_episodes=10, rollout_depth=10, simulation
 
     render_mode = 'rgb_array' if render else None
     env = gym.make(env_name, render_mode=render_mode)
-    if render:
-        env = RecordVideo(env, video_folder=f"{env_name}-agent", name_prefix="eval",
-                    episode_trigger=lambda x: True)
-        env = RecordEpisodeStatistics(env, buffer_length=num_episodes)
+    env = RecordVideo(env, video_folder=f"{env_name}-agent", name_prefix="eval",
+                  episode_trigger=lambda x: True)
+    env = RecordEpisodeStatistics(env, buffer_length=num_episodes)
 
     total_rewards_all_episodes = []
 
@@ -349,239 +369,54 @@ def evaluate_mcts_on_env(env_name, num_episodes=10, rollout_depth=10, simulation
 
     avg_reward = sum(total_rewards_all_episodes) / num_episodes if num_episodes > 0 else 0
     std_reward = np.std(total_rewards_all_episodes) if num_episodes > 0 else 0.0
-    avg_search_time_per_move = np.mean(search_times)
-    std_search_time_per_move = np.std(search_times)
+    search_time_per_move = np.mean(search_times)
+    search_time_std = np.std(search_times)
     
-    logger.info(f"Avg Reward: {avg_reward:.2f}, Std Reward: {std_reward:.2f}")
-    logger.info(f"Avg Search Time/Move: {avg_search_time_per_move:.4f}s, Std Search Time: {std_search_time_per_move:.4f}s\n")
-    
-    return avg_reward, std_reward, total_rewards_all_episodes, avg_search_time_per_move, std_search_time_per_move
+    logger.info(f"\nEvaluation Complete for {env_name}.")
+    logger.info(f"Number of Episodes: {num_episodes}")
+    logger.info(f"Simulations per Move (MCTS budget): {mcts_sim_budget}")
+    logger.info(f"Rollout Depth (within simulation): {mcts_rollout_depth}")
+    logger.info(f"Number of Parallel Workers: {mcts_agent.num_workers if mcts_agent.num_workers > 0 else 'Serial'}")
+    logger.info(f"Average Reward: {avg_reward:.2f}")
+    logger.info(f"Standard Deviation of Rewards: {std_reward:.2f}")
+    logger.info(f"Individual Rewards: {total_rewards_all_episodes}")
+    logger.info(f"Average Search Time per Move: {search_time_per_move:.4f} seconds")
+    logger.info(f"Search Time Standard Deviation: {search_time_std:.4f} seconds")
+    return total_rewards_all_episodes
 
 
-
-def plot_experiment_data(results_list, env_name,
-                         fixed_line_param_config,
-                         varying_x_axis_param_config,
-                         fixed_line_param_values,
-                         varying_x_axis_param_values,
-                         y_metric_config,
-                         plot_title_prefix="Effect of"):
-    """
-    为实验结果生成图表的通用函数。
-    示例 fixed_line_param_config: {'display_name': 'Number of Workers', 'dict_key': 'workers'}
-    示例 varying_x_axis_param_config: {'display_name': 'Simulations per Move', 'dict_key': 'simulations'}
-    示例 y_metric_config: {'value_key': 'avg_reward', 'error_key': 'std_reward', 'axis_label': 'Average Episode Reward'}
-    """
-    plt.figure(figsize=(12, 7))
-
-    fixed_param_display_name = fixed_line_param_config['display_name']
-    fixed_param_dict_key = fixed_line_param_config['dict_key']
-
-    varying_param_display_name = varying_x_axis_param_config['display_name']
-    varying_param_dict_key = varying_x_axis_param_config['dict_key']
-
-    y_value_key = y_metric_config['value_key']
-    y_error_key = y_metric_config['error_key']
-    y_axis_label = y_metric_config['axis_label']
-
-    for fixed_val in fixed_line_param_values:
-        # 临时列表，用于存储找到的数据点
-        temp_x_values = []
-        temp_y_values = []
-        temp_y_errors = []
-
-        # 遍历所有可能的 varying parameter 值以查找匹配项
-        for vary_val in varying_x_axis_param_values: # 此处无需排序
-            for res_item in results_list:
-                # 检查 res_item 中的值是否为数字类型，以避免与 None 或其他类型比较时出错
-                res_fixed_val = res_item.get(fixed_param_dict_key)
-                res_varying_val = res_item.get(varying_param_dict_key)
-
-                if isinstance(res_fixed_val, (int, float)) and \
-                   isinstance(res_varying_val, (int, float)) and \
-                   res_fixed_val == fixed_val and \
-                   res_varying_val == vary_val:
-                    
-                    temp_x_values.append(vary_val)
-                    temp_y_values.append(res_item[y_value_key])
-                    temp_y_errors.append(res_item[y_error_key])
-                    # 假设 results_list 中的 (fixed_val, vary_val) 组合是唯一的
-                    break 
-        
-        if temp_x_values: # 如果为此 fixed_val 找到了任何数据
-            # 根据 x 值 (vary_val) 对收集到的数据点进行排序
-            sorted_indices = np.argsort(temp_x_values)
-            
-            plot_x = np.array(temp_x_values)[sorted_indices]
-            plot_y = np.array(temp_y_values)[sorted_indices]
-            plot_y_err = np.array(temp_y_errors)[sorted_indices]
-
-            if len(plot_x) == len(plot_y) and len(plot_x) == len(plot_y_err): # 如果这样构造，应该始终为 true
-                plt.plot(plot_x, plot_y, marker='o', linestyle='-', label=f'{fixed_param_display_name} = {fixed_val}')
-                plt.fill_between(plot_x, np.array(plot_y) - np.array(plot_y_err), np.array(plot_y) + np.array(plot_y_err), alpha=0.2)
-            else:
-                # 当前逻辑不应发生这种情况。
-                logger.warning(f"Data consistency issue for {fixed_param_display_name} = {fixed_val}. X:{len(plot_x)}, Y:{len(plot_y)}, Err:{len(plot_y_err)}")
-        else:
-            logger.info(f"No data found for line with {fixed_param_display_name} = {fixed_val}. Skipping this line.")
-
-    plt.title(f'{plot_title_prefix} {varying_param_display_name} on {y_axis_label} ({env_name})')
-    plt.xlabel(varying_param_display_name)
-    plt.ylabel(y_axis_label)
-    # Only show legend if there are plotted lines
-    handles, labels = plt.gca().get_legend_handles_labels()
-    if handles:
-        plt.legend()
-    plt.grid(True)
-    plt.tight_layout()
-    
-    # 清理文件名
-    safe_env_name = env_name.replace('/', '_').replace('\\', '_')
-    safe_varying_param_name = varying_param_display_name.replace(' ', '_')
-    safe_y_label_for_fname = y_axis_label.replace(' ', '_').replace('/', '_').replace('(', '').replace(')', '')
-    safe_fixed_param_name = fixed_param_display_name.replace(' ', '_')
-
-    filename = f"TreeP_{safe_env_name}_plot_X_{safe_varying_param_name}_Y_{safe_y_label_for_fname}_lines_{safe_fixed_param_name}.png"
-    plt.savefig(filename)
-    logger.info(f"Plot saved as {filename}")
-    # plt.show() # 在脚本中通常注释掉
-    plt.close() # 关闭图形以释放内存，如果生成许多图表则很重要
-    
 if __name__ == '__main__':
     random.seed(42) 
-    SELECTED_ENV_NAME = 'CartPole-v1'
+    # --- Configuration for Evaluation ---
+    # ATARI_ENV_NAME = 'ALE/Pong-v5'
+    ATARI_ENV_NAME = 'ALE/Breakout-v5' 
+    CLASSIC_CONTROL_ENV_NAME = 'CartPole-v1' # A simple environment for testing non-Atari compatibility
+    # CLASSIC_CONTROL_ENV_NAME = 'LunarLander-v2' # More complex, discrete actions
+
+    SELECTED_ENV_NAME = CLASSIC_CONTROL_ENV_NAME # Change this to test different environments
+
+    NUM_EPISODES_TO_RUN = 5
+    SIMULATIONS_PER_MOVE = 100 # Budget for MCTS search (number of tree traversals/sims)
+    ROLLOUT_DEPTH_MCTS = 15 # Max depth for random rollouts within each simulation 
+    NUM_MCTS_WORKERS = cpu_count() // 2 if cpu_count() > 1 else 0 # Use half cores or run serially
+    # NUM_MCTS_WORKERS = 1
+    RENDER_GAME = True
+
+    logger.info(f"Starting MCTS evaluation on {SELECTED_ENV_NAME} with {NUM_MCTS_WORKERS} worker(s).")
     
-    # Experiment Parameters
-    NUM_EPISODES_FOR_EXPERIMENT = 5  # Keep low for faster experiments
-    ROLLOUT_DEPTH_FOR_EXPERIMENT = 15 # MCTS internal rollout depth
-
-    simulations_options = [50, 100, 200, 400, 600, 1000] # SIMULATIONS_PER_MOVE    
-    worker_options = [1, 2, 3, 4, 5, 6] # Number of MCTS workers to test
-    
-    # DEGUB
-    # simulations_options = [50, 100] # SIMULATIONS_PER_MOVE    
-    # worker_options = [1, 2] # Number of MCTS workers to test
-
-
-    logger.info(f"Starting MCTS search time experiments on {SELECTED_ENV_NAME}")
-    logger.info(f"Worker options: {worker_options}")
-    logger.info(f"Simulations per move options: {simulations_options}")
-    logger.info(f"Episodes per setting: {NUM_EPISODES_FOR_EXPERIMENT}, Rollout depth: {ROLLOUT_DEPTH_FOR_EXPERIMENT}\n\n")
-
-    experiment_results = []
-
+    # Ensure gymnasium[accept-rom-license] is installed if using Atari
     if SELECTED_ENV_NAME.startswith("ALE/"):
-        try:
-            import ale_py # Check if Atari ROMs are available
-            logger.info("ALE environment selected. Ensure you have 'pip install gymnasium[accept-rom-license]' if needed.")
-        except ImportError:
-            logger.error("ALE environment selected, but 'ale_py' not found. Skipping Atari experiments.")
-            SELECTED_ENV_NAME = 'CartPole-v1' # Fallback
-            logger.warning(f"Falling back to {SELECTED_ENV_NAME} for experiments.")
-    
-    total_experiments = len(simulations_options) * len(worker_options)
-    current_experiment = 0
+            pass # Assume license is accepted via pip install gymnasium[accept-rom-license]
 
-    for workers in worker_options:
-        for sims in simulations_options:
-            current_experiment += 1
-            logger.info(f"\n------------- Running Experiment {current_experiment}/{total_experiments} ----------------------------------")
-            logger.info(f"Sim/move={sims}, Workers={workers}")
-            
-            avg_r, std_r, all_rewards, avg_search_t, std_search_t = evaluate_mcts_on_env(
-                env_name=SELECTED_ENV_NAME,
-                num_episodes=NUM_EPISODES_FOR_EXPERIMENT,
-                rollout_depth=ROLLOUT_DEPTH_FOR_EXPERIMENT,
-                simulations_per_move=sims,
-                num_workers=workers,
-                render=False, # Disable rendering for speed during experiments
-                reuse_tree=False # Isolate search time for each move decision
-            )
-            experiment_results.append({
-                'workers': workers,
-                'simulations': sims,
-                'avg_search_time': avg_search_t,
-                'std_search_time': std_search_t,
-                'avg_reward': avg_r,
-                'std_reward': std_r,
-                'all_rewards': all_rewards
-            })
-
-    # --- Output Original Data ---
-    logger.info("\n\n--- Experiment Finished: Summary of Results ---")
-    print("===================================================================================")
-    print(f"{'workers':<12} | {'sim_per_move':<15} | {'avg_reward':<15} | {'std_reward':<15} | {'all_rewards'} ")
-    print("-----------------------------------------------------------------------------------")
-    for res in experiment_results:
-        rewards_str = ", ".join([f"{r:.1f}" for r in res['all_rewards']])
-        print(f"{res['workers']:<12} | {res['simulations']:<15} | {res['avg_reward']:<15.2f} | {res['std_reward']:<15.2f} | {rewards_str}")
-    print("===================================================================================")
-    # summary of time
-    print("===================================================================================")
-    print(f"{'workers':<12} | {'sim_per_move':<15} | {'search_time_per_move':<15} | {'search_time_std':<15}")
-    print("-----------------------------------------------------------------------------------")
-    for res in experiment_results:
-        print(f"{res['workers']:<12} | {res['simulations']:<15} | {res['avg_search_time']:<15.4f} | {res['std_search_time']:<15.4f}")
-    print("===================================================================================")
-    
-    # --- 绘制结果图表 ---
-    logger.info("Generating plots...")
-
-    # 定义Y轴指标的配置
-    y_metric_reward_config = {'value_key': 'avg_reward', 'error_key': 'std_reward', 'axis_label': 'Average Episode Reward'}
-    y_metric_search_time_config = {'value_key': 'avg_search_time', 'error_key': 'std_search_time', 'axis_label': 'Average Search Time (s)'}
-
-    # 定义参数配置
-    workers_config = {'display_name': 'Number of Workers', 'dict_key': 'workers'}
-    simulations_config = {'display_name': 'Simulations per Move', 'dict_key': 'simulations'}
-
-    # 图表1: X轴=Simulations per Move, 线条=Number of Workers, Y轴=Average Reward
-    plot_experiment_data(
-        results_list=experiment_results,
+    evaluate_mcts_on_env(
         env_name=SELECTED_ENV_NAME,
-        fixed_line_param_config=workers_config,
-        varying_x_axis_param_config=simulations_config,
-        fixed_line_param_values=worker_options,
-        varying_x_axis_param_values=simulations_options,
-        y_metric_config=y_metric_reward_config,
-        plot_title_prefix="Effect of"
-    )
-
-    # 图表2: X轴=Simulations per Move, 线条=Number of Workers, Y轴=Average Search Time
-    plot_experiment_data(
-        results_list=experiment_results,
-        env_name=SELECTED_ENV_NAME,
-        fixed_line_param_config=workers_config,
-        varying_x_axis_param_config=simulations_config,
-        fixed_line_param_values=worker_options,
-        varying_x_axis_param_values=simulations_options,
-        y_metric_config=y_metric_search_time_config,
-        plot_title_prefix="Effect of"
-    )
-
-    # 图表3: X轴=Number of Workers, 线条=Simulations per Move, Y轴=Average Reward
-    plot_experiment_data(
-        results_list=experiment_results,
-        env_name=SELECTED_ENV_NAME,
-        fixed_line_param_config=simulations_config,
-        varying_x_axis_param_config=workers_config,
-        fixed_line_param_values=simulations_options,
-        varying_x_axis_param_values=worker_options,
-        y_metric_config=y_metric_reward_config,
-        plot_title_prefix="Effect of"
-    )
-
-    # 图表4: X轴=Number of Workers, 线条=Simulations per Move, Y轴=Average Search Time
-    plot_experiment_data(
-        results_list=experiment_results,
-        env_name=SELECTED_ENV_NAME,
-        fixed_line_param_config=simulations_config,
-        varying_x_axis_param_config=workers_config,
-        fixed_line_param_values=simulations_options,
-        varying_x_axis_param_values=worker_options,
-        y_metric_config=y_metric_search_time_config,
-        plot_title_prefix="Effect of"
+        num_episodes=NUM_EPISODES_TO_RUN,
+        rollout_depth=ROLLOUT_DEPTH_MCTS,
+        simulations_per_move=SIMULATIONS_PER_MOVE,
+        num_workers=NUM_MCTS_WORKERS,
+        render=RENDER_GAME,
+        reuse_tree=False,
     )
     
-    logger.info("Experiment run and plotting complete. Check for .png files for graphs.")
-    # nohup python MCTS_treep_experiment.py > cart_pole_treep_exp.log 2>&1 &
+    # nohup python MCTS_basic_mont.py > test_1.log 2>&1 &
+
