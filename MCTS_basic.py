@@ -8,8 +8,7 @@ import logging
 import gymnasium as gym
 from gymnasium.wrappers import RecordEpisodeStatistics, RecordVideo
 import numpy as np
-import ale_py
-gym.register_envs(ale_py)
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -365,14 +364,14 @@ if __name__ == '__main__':
     random.seed(42) 
     # --- Configuration for Evaluation ---
     ATARI_ENV_NAME = 'ALE/Breakout-v5' 
-    CLASSIC_CONTROL_ENV_NAME = 'CartPole-v1' # A simple environment for testing non-Atari compatibility
+    # CLASSIC_CONTROL_ENV_NAME = 'CartPole-v1' # A simple environment for testing non-Atari compatibility
     # CLASSIC_CONTROL_ENV_NAME = 'LunarLander-v2' # More complex, discrete actions
 
-    SELECTED_ENV_NAME = CLASSIC_CONTROL_ENV_NAME # Change this to test different environments
+    SELECTED_ENV_NAME = ATARI_ENV_NAME # Change this to test different environments
 
     NUM_EPISODES_TO_RUN = 5
-    SIMULATIONS_PER_MOVE = 600 # Budget for MCTS search (number of tree traversals/sims)
-    ROLLOUT_DEPTH_MCTS = 50 # Max depth for random rollouts within each simulation 
+    SIMULATIONS_PER_MOVE = 128 # Budget for MCTS search (number of tree traversals/sims)
+    ROLLOUT_DEPTH_MCTS = 100 # Max depth for random rollouts within each simulation 
     NUM_MCTS_WORKERS = cpu_count() // 2 if cpu_count() > 1 else 0 # Use half cores or run serially
     # NUM_MCTS_WORKERS = 1
     RENDER_GAME = True

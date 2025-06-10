@@ -8,7 +8,8 @@ import logging
 import gymnasium as gym
 from gymnasium.wrappers import RecordEpisodeStatistics, RecordVideo
 import numpy as np
-
+import ale_py
+gym.register_envs(ale_py)
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -16,7 +17,7 @@ logger = logging.getLogger(__name__)
 # Helper function for multiprocessing pool.
 def _simulate_rollout_task(env_name, task_data,
                            rollout_depth_limit, possible_actions_indices,
-                           worker_seed, random_seed, gamma=0.95):
+                           worker_seed, random_seed, gamma=0.99):
     """
     Performs a random rollout from a given state for a worker process.
     task_data can be:
@@ -141,13 +142,15 @@ class MCTS_Parallel_Simulations:
 
     def _select_promising_node(self, root_node):
         node = root_node
+        depth = 0
         while not node.is_terminal:
             if not node.is_fully_expanded():
                 return node
+            elif depth >= 100:
+                return node  # Limit depth to prevent excessive expansion
             else:
-                if not node.children: return node
                 node = node.select_best_child_ucb1()
-                if node is None: return root_node # Should not happen
+                depth += 1
         return node
 
     def _expand_node(self, parent_node, seed):
@@ -175,7 +178,7 @@ class MCTS_Parallel_Simulations:
         parent_node.add_child(child_node)
         return child_node
 
-    def _backpropagate(self, node, reward_from_rollout, gamma=0.95):
+    def _backpropagate(self, node, reward_from_rollout, gamma=0.99):
         current_node = node
         cur_value_estimation = reward_from_rollout
         while current_node is not None:
@@ -221,12 +224,18 @@ class MCTS_Parallel_Simulations:
 
             batch_simulation_tasks_data = [] # Holds (node_for_bp, task_args_for_pool)
             
+            
+            cur_depth = len(root_node.action_sequence_from_root)
             promising_node = self._select_promising_node(root_node)
             node_to_evaluate = promising_node
             # print(f"promising node: {promising_node.action_sequence_from_root}")
             if not promising_node.is_terminal:
-                node_to_evaluate = self._expand_node(promising_node, seed)
-            
+                if len(promising_node.action_sequence_from_root)-cur_depth >= 100:
+                    node_to_evaluate = promising_node # Do not expand if depth limit reached
+                else:
+                    node_to_evaluate = self._expand_node(promising_node, seed)
+                    # print(f"Expanded node: {node_to_evaluate.action_sequence_from_root} with action {node_to_evaluate.action_that_led_here}")
+            # print(len(root_node.children))
             # If after selection/expansion, the node is terminal, backpropagate its intrinsic reward
             if node_to_evaluate.is_terminal:
                 self._backpropagate(node_to_evaluate, node_to_evaluate.reward_at_node) # Or 0 if terminal means end of game with no further reward
@@ -249,8 +258,8 @@ class MCTS_Parallel_Simulations:
             # Backpropagate the rewards from the rollouts
             mean_rollout_reward = np.mean(rollout_rewards)
             std_rollout_reward = np.std(rollout_rewards)
-            if std_rollout_reward != 0:
-                print(f"Mean Rollout Reward: {mean_rollout_reward:.2f}, Std Dev: {std_rollout_reward:.2f}")
+            # if std_rollout_reward != 0:
+            #     print(f"Mean Rollout Reward: {mean_rollout_reward:.2f}, Std Dev: {std_rollout_reward:.2f}")
             self._backpropagate(node_to_evaluate, mean_rollout_reward)
             
             simulations_done += len(batch_simulation_tasks_data)
@@ -364,14 +373,14 @@ if __name__ == '__main__':
     # --- Configuration for Evaluation ---
     # ATARI_ENV_NAME = 'ALE/Pong-v5'
     ATARI_ENV_NAME = 'ALE/Breakout-v5' 
-    CLASSIC_CONTROL_ENV_NAME = 'CartPole-v1' # A simple environment for testing non-Atari compatibility
+    # CLASSIC_CONTROL_ENV_NAME = 'CartPole-v1' # A simple environment for testing non-Atari compatibility
     # CLASSIC_CONTROL_ENV_NAME = 'LunarLander-v2' # More complex, discrete actions
 
-    SELECTED_ENV_NAME = CLASSIC_CONTROL_ENV_NAME # Change this to test different environments
+    SELECTED_ENV_NAME = ATARI_ENV_NAME # Change this to test different environments
 
     NUM_EPISODES_TO_RUN = 5
-    SIMULATIONS_PER_MOVE = 100 # Budget for MCTS search (number of tree traversals/sims)
-    ROLLOUT_DEPTH_MCTS = 15 # Max depth for random rollouts within each simulation 
+    SIMULATIONS_PER_MOVE = 128 # Budget for MCTS search (number of tree traversals/sims)
+    ROLLOUT_DEPTH_MCTS = 100 # Max depth for random rollouts within each simulation 
     NUM_MCTS_WORKERS = cpu_count() // 2 if cpu_count() > 1 else 0 # Use half cores or run serially
     # NUM_MCTS_WORKERS = 1
     RENDER_GAME = True

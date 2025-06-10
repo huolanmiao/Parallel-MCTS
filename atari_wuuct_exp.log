@@ -1,0 +1,57 @@
+nohup: ignoring input
+2025-05-31 01:36:05,212 - INFO - Starting MCTS search time experiments on ALE/Breakout-v5
+2025-05-31 01:36:05,212 - INFO - Worker options: [1, 2, 4, 8, 16]
+2025-05-31 01:36:05,212 - INFO - Simulations per move options: [8, 16, 32, 64, 128, 256]
+2025-05-31 01:36:05,212 - INFO - Episodes per setting: 5, Rollout depth: 100
+
+
+2025-05-31 01:36:05,212 - INFO - ALE environment selected. Ensure you have 'pip install gymnasium[accept-rom-license]' if needed.
+2025-05-31 01:36:05,212 - INFO - 
+------------- Running Experiment 1/30 ----------------------------------
+2025-05-31 01:36:05,212 - INFO - Sim/move=8, Workers=1
+2025-05-31 01:36:05,212 - INFO - Initializing MCTS agent for ALE/Breakout-v5...
+A.L.E: Arcade Learning Environment (version 0.11.1+2750686)
+[Powered by Stella]
+2025-05-31 01:36:05,516 - INFO - Starting evaluation for 5 episodes on ALE/Breakout-v5...
+2025-05-31 01:46:13,816 - INFO - Episode 1 finished after 185 steps. Reward: 1.0
+2025-05-31 01:59:39,567 - INFO - Episode 2 finished after 234 steps. Reward: 2.0
+2025-05-31 02:08:27,389 - INFO - Episode 3 finished after 164 steps. Reward: 1.0
+2025-05-31 02:20:33,888 - INFO - Episode 4 finished after 214 steps. Reward: 2.0
+2025-05-31 02:45:26,355 - INFO - Episode 5 finished after 383 steps. Reward: 9.0
+2025-05-31 02:45:26,356 - INFO - Avg Reward: 3.00, Std Reward: 3.03
+2025-05-31 02:45:26,356 - INFO - Avg Search Time/Move: 3.5253s, Std Search Time: 0.5242s
+
+2025-05-31 02:45:26,356 - INFO - 
+------------- Running Experiment 2/30 ----------------------------------
+2025-05-31 02:45:26,356 - INFO - Sim/move=16, Workers=1
+2025-05-31 02:45:26,357 - INFO - Initializing MCTS agent for ALE/Breakout-v5...
+2025-05-31 02:45:26,657 - INFO - Starting evaluation for 5 episodes on ALE/Breakout-v5...
+2025-05-31 03:34:42,097 - INFO - Episode 1 finished after 382 steps. Reward: 11.0
+2025-05-31 04:02:28,226 - INFO - Episode 2 finished after 241 steps. Reward: 3.0
+2025-05-31 04:33:01,224 - INFO - Episode 3 finished after 262 steps. Reward: 4.0
+2025-05-31 05:00:23,868 - INFO - Episode 4 finished after 239 steps. Reward: 3.0
+2025-05-31 05:57:49,509 - INFO - Episode 5 finished after 432 steps. Reward: 12.0
+2025-05-31 05:57:49,510 - INFO - Avg Reward: 6.60, Std Reward: 4.03
+2025-05-31 05:57:49,510 - INFO - Avg Search Time/Move: 7.4175s, Std Search Time: 1.2165s
+
+2025-05-31 05:57:49,510 - INFO - 
+------------- Running Experiment 3/30 ----------------------------------
+2025-05-31 05:57:49,510 - INFO - Sim/move=32, Workers=1
+2025-05-31 05:57:49,510 - INFO - Initializing MCTS agent for ALE/Breakout-v5...
+2025-05-31 05:57:49,810 - INFO - Starting evaluation for 5 episodes on ALE/Breakout-v5...
+2025-05-31 10:51:13,346 - INFO - Episode 1 finished after 833 steps. Reward: 41.0
+2025-05-31 17:09:56,527 - INFO - Episode 2 finished after 983 steps. Reward: 87.0
+2025-05-31 19:55:57,372 - INFO - Episode 3 finished after 558 steps. Reward: 13.0
+2025-06-01 00:42:12,768 - INFO - Episode 4 finished after 814 steps. Reward: 29.0
+2025-06-01 02:54:03,057 - INFO - Episode 5 finished after 471 steps. Reward: 17.0
+2025-06-01 02:54:03,058 - INFO - Avg Reward: 37.40, Std Reward: 26.67
+2025-06-01 02:54:03,058 - INFO - Avg Search Time/Move: 20.5988s, Std Search Time: 5.9141s
+
+2025-06-01 02:54:03,058 - INFO - 
+------------- Running Experiment 4/30 ----------------------------------
+2025-06-01 02:54:03,058 - INFO - Sim/move=64, Workers=1
+2025-06-01 02:54:03,058 - INFO - Initializing MCTS agent for ALE/Breakout-v5...
+2025-06-01 02:54:03,359 - INFO - Starting evaluation for 5 episodes on ALE/Breakout-v5...
+2025-06-02 11:03:51,177 - INFO - Episode 1 finished after 1765 steps. Reward: 422.0
+2025-06-04 00:53:37,821 - INFO - Episode 2 finished after 1955 steps. Reward: 431.0
+2025-06-05 14:08:10,907 - INFO - Episode 3 finished after 1929 steps. Reward: 412.0

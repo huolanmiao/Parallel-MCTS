@@ -8,7 +8,6 @@ import logging
 import gymnasium as gym
 from gymnasium.wrappers import RecordEpisodeStatistics, RecordVideo
 import numpy as np
-import matplotlib.pyplot as plt
 import ale_py
 gym.register_envs(ale_py)
 
@@ -82,6 +81,7 @@ class Node:
         self.wins = 0.0
         self.visits = 0
         self.C = ucb_exploration_const
+        self.trust_observed_Q = 0.0 # For N-Q trust backpropagation
 
         # State information (one of these will be primarily used based on cloning_method)
         self.observation = observation
@@ -187,26 +187,29 @@ class MCTS_Parallel_Simulations:
             current_node.visits += 1
             # The reward backpropagated should be the future rewards (rollout)
             # The immediate reward for reaching current_node is stored in current_node.reward_at_node
-            # Standard MCTS backpropagates the outcome of the playout.
-            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
+            # Standard MCTS backpropagates the outcome of the playout.            
             current_node.wins += cur_value_estimation
+            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
             current_node = current_node.parent
             
-    def _backpropagate_N(self, node):
+    def _backpropagate_N_Q_trust(self, node, gamma=0.99):
         current_node = node
+        trust_observed_Q = node.wins / node.visits if node.visits > 0 else 0.0
+        node.trust_observed_Q = trust_observed_Q
+        cur_value_estimation = trust_observed_Q
         while current_node is not None:
             current_node.visits += 1
+            current_node.wins += cur_value_estimation
+            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation             
             current_node = current_node.parent
 
-    def _backpropagate_Q(self, node, reward_from_rollout, gamma=0.99):
+    def _backpropagate_Q_update(self, node, reward_from_rollout, gamma=0.99):
         current_node = node
-        cur_value_estimation = reward_from_rollout
+        trust_observed_Q = node.trust_observed_Q
+        cur_value_update = reward_from_rollout - trust_observed_Q
         while current_node is not None:
-            # The reward backpropagated should be the future rewards (rollout)
-            # The immediate reward for reaching current_node is stored in current_node.reward_at_node
-            # Standard MCTS backpropagates the outcome of the playout.
-            cur_value_estimation = node.reward_at_node + gamma * cur_value_estimation 
-            current_node.wins += cur_value_estimation
+            current_node.wins += cur_value_update
+            cur_value_update = gamma * cur_value_update
             current_node = current_node.parent
 
     def search(self, current_observation, current_info, is_current_state_terminated, is_current_state_truncated, history_actions, seed, reuse_tree=False): 
@@ -253,13 +256,12 @@ class MCTS_Parallel_Simulations:
                         node_to_evaluate = promising_node # Do not expand if depth limit reached
                     else:
                         node_to_evaluate = self._expand_node(promising_node, seed)
-                
                 # If after selection/expansion, the node is terminal, backpropagate its intrinsic reward
                 if node_to_evaluate.is_terminal:
                     self._backpropagate(node_to_evaluate, node_to_evaluate.reward_at_node) # Or 0 if terminal means end of game with no further reward
                     simulations_done += 1
                 else:
-                    self._backpropagate_N(node_to_evaluate)
+                    self._backpropagate_N_Q_trust(node_to_evaluate)
                     # Prepare data for parallel simulation task
                     task_data_for_worker = (node_to_evaluate.action_sequence_from_root, root_node.observation)
                     
@@ -283,7 +285,7 @@ class MCTS_Parallel_Simulations:
                     rollout_rewards.append(_simulate_rollout_task(*item['task_args']))
             
             for i, item in enumerate(batch_simulation_tasks_data):
-                self._backpropagate_Q(item['node_for_bp'], rollout_rewards[i])
+                self._backpropagate_Q_update(item['node_for_bp'], rollout_rewards[i])
             simulations_done += len(batch_simulation_tasks_data)
 
 
@@ -465,12 +467,14 @@ def plot_experiment_data(results_list, env_name,
     safe_y_label_for_fname = y_axis_label.replace(' ', '_').replace('/', '_').replace('(', '').replace(')', '')
     safe_fixed_param_name = fixed_param_display_name.replace(' ', '_')
 
-    filename = f"WUUCT_{safe_env_name}_plot_X_{safe_varying_param_name}_Y_{safe_y_label_for_fname}_lines_{safe_fixed_param_name}.png"
+    filename = f"TOUCT_{safe_env_name}_plot_X_{safe_varying_param_name}_Y_{safe_y_label_for_fname}_lines_{safe_fixed_param_name}.png"
     plt.savefig(filename)
     logger.info(f"Plot saved as {filename}")
     # plt.show() # 在脚本中通常注释掉
     plt.close() # 关闭图形以释放内存，如果生成许多图表则很重要
     
+
+
 if __name__ == '__main__':
     random.seed(42) 
     # --- Configuration for Evaluation ---
@@ -610,5 +614,5 @@ if __name__ == '__main__':
     )
     
     logger.info("Experiment run and plotting complete. Check for .png files for graphs.")
-    # nohup python MCTS_wuuct_experiment.py > atari_wuuct_exp.log 2>&1 &
+    # nohup python MCTS_touct_experiment.py > atari_touct_exp.log 2>&1 &
 

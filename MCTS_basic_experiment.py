@@ -9,6 +9,8 @@ import gymnasium as gym
 from gymnasium.wrappers import RecordEpisodeStatistics, RecordVideo
 import numpy as np
 import matplotlib.pyplot as plt
+import ale_py
+gym.register_envs(ale_py)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -450,10 +452,10 @@ if __name__ == '__main__':
     # --- Configuration for Experiment ---
     # ATARI_ENV_NAME = 'ALE/Pong-v5'
     ATARI_ENV_NAME = 'ALE/Breakout-v5' 
-    CLASSIC_CONTROL_ENV_NAME = 'CartPole-v1'
+    # CLASSIC_CONTROL_ENV_NAME = 'CartPole-v1'
     # CLASSIC_CONTROL_ENV_NAME = 'LunarLander-v2'
 
-    SELECTED_ENV_NAME = CLASSIC_CONTROL_ENV_NAME 
+    SELECTED_ENV_NAME = ATARI_ENV_NAME 
 
     # Reduce episodes for quicker experiment; increase for more stable results
     NUM_EPISODES_PER_CONFIG = 5  # Number of episodes per parameter combination
@@ -479,19 +481,19 @@ if __name__ == '__main__':
     # --- Parameter Ranges ---
     logger.info("Defining parameter ranges for the experiment...")
     # Define parameter ranges for the experiment
-    simulations_per_move_options = [1, 2, 5, 10, 20, 35, 55] # More simulations usually better, but slower
-    rollout_depth_options = [5, 10, 15, 20, 25, 30]         # Deeper rollouts might be better for some envs
+    simulations_per_move_options = [1, 8, 16, 32, 64, 128] # More simulations usually better, but slower
+    rollout_depth_options = [100]         # Deeper rollouts might be better for some envs
 
     # --DEBUG--
     # simulations_per_move_options = [1, 2] # More simulations usually better, but slower
     # rollout_depth_options = [5, 10]         # Deeper rollouts might be better for some envs
     
     # For Atari, these values might need to be much larger. For CartPole, they are reasonable.
-    if SELECTED_ENV_NAME.startswith("ALE/"):
-        simulations_per_move_options = [50, 100, 200]
-        rollout_depth_options = [20, 50, 80]
-        NUM_EPISODES_PER_CONFIG = 3 # Atari is slower
-        logger.info("Using adjusted parameters for Atari environment.")
+    # if SELECTED_ENV_NAME.startswith("ALE/"):
+    #     simulations_per_move_options = [50, 100, 200]
+    #     rollout_depth_options = [20, 50, 80]
+    #     NUM_EPISODES_PER_CONFIG = 3 # Atari is slower
+    #     logger.info("Using adjusted parameters for Atari environment.")
 
     logger.info(f"Simulations per Move Options: {simulations_per_move_options}")
     logger.info(f"Rollout Depth Options: {rollout_depth_options}\n")

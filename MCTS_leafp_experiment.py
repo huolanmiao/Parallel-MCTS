@@ -9,6 +9,8 @@ import gymnasium as gym
 from gymnasium.wrappers import RecordEpisodeStatistics, RecordVideo
 import numpy as np
 import matplotlib.pyplot as plt
+import ale_py
+gym.register_envs(ale_py)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -17,7 +19,7 @@ logger = logging.getLogger(__name__)
 # Helper function for multiprocessing pool.
 def _simulate_rollout_task(env_name, task_data,
                            rollout_depth_limit, possible_actions_indices,
-                           worker_seed, random_seed, gamma=0.95):
+                           worker_seed, random_seed, gamma=0.99):
     """
     Performs a random rollout from a given state for a worker process.
     task_data can be:
@@ -142,13 +144,15 @@ class MCTS_Parallel_Simulations:
 
     def _select_promising_node(self, root_node):
         node = root_node
+        depth = 0
         while not node.is_terminal:
             if not node.is_fully_expanded():
                 return node
+            elif depth >= 100:
+                return node  # Limit depth to prevent excessive expansion
             else:
-                if not node.children: return node
                 node = node.select_best_child_ucb1()
-                if node is None: return root_node # Should not happen
+                depth += 1
         return node
 
     def _expand_node(self, parent_node, seed):
@@ -176,7 +180,7 @@ class MCTS_Parallel_Simulations:
         parent_node.add_child(child_node)
         return child_node
 
-    def _backpropagate(self, node, reward_from_rollout, gamma=0.95):
+    def _backpropagate(self, node, reward_from_rollout, gamma=0.99):
         current_node = node
         cur_value_estimation = reward_from_rollout
         while current_node is not None:
@@ -222,12 +226,17 @@ class MCTS_Parallel_Simulations:
 
             batch_simulation_tasks_data = [] # Holds (node_for_bp, task_args_for_pool)
             
+            
+            cur_depth = len(root_node.action_sequence_from_root)
             promising_node = self._select_promising_node(root_node)
             node_to_evaluate = promising_node
             # print(f"promising node: {promising_node.action_sequence_from_root}")
             if not promising_node.is_terminal:
-                node_to_evaluate = self._expand_node(promising_node, seed)
-            
+                if len(promising_node.action_sequence_from_root)-cur_depth >= 100:
+                    node_to_evaluate = promising_node # Do not expand if depth limit reached
+                else:
+                    node_to_evaluate = self._expand_node(promising_node, seed)
+                    
             # If after selection/expansion, the node is terminal, backpropagate its intrinsic reward
             if node_to_evaluate.is_terminal:
                 self._backpropagate(node_to_evaluate, node_to_evaluate.reward_at_node) # Or 0 if terminal means end of game with no further reward
@@ -435,7 +444,7 @@ def plot_experiment_data(results_list, env_name,
     safe_y_label_for_fname = y_axis_label.replace(' ', '_').replace('/', '_').replace('(', '').replace(')', '')
     safe_fixed_param_name = fixed_param_display_name.replace(' ', '_')
 
-    filename = f"{safe_env_name}_plot_X_{safe_varying_param_name}_Y_{safe_y_label_for_fname}_lines_{safe_fixed_param_name}.png"
+    filename = f"LeafP_{safe_env_name}_plot_X_{safe_varying_param_name}_Y_{safe_y_label_for_fname}_lines_{safe_fixed_param_name}.png"
     plt.savefig(filename)
     logger.info(f"Plot saved as {filename}")
     # plt.show() # 在脚本中通常注释掉
@@ -446,18 +455,18 @@ if __name__ == '__main__':
     # --- Configuration for Evaluation ---
     # ATARI_ENV_NAME = 'ALE/Pong-v5'
     ATARI_ENV_NAME = 'ALE/Breakout-v5' 
-    SELECTED_ENV_NAME = 'CartPole-v1' # A simple environment for testing non-Atari compatibility
+    SELECTED_ENV_NAME = ATARI_ENV_NAME
 
     # Experiment Parameters
     NUM_EPISODES_FOR_EXPERIMENT = 5  # Keep low for faster experiments
-    ROLLOUT_DEPTH_FOR_EXPERIMENT = 15 # MCTS internal rollout depth
+    ROLLOUT_DEPTH_FOR_EXPERIMENT = 100 # MCTS internal rollout depth
 
-    # simulations_options = [50, 100, 200, 400, 600, 1000] # SIMULATIONS_PER_MOVE    
-    # worker_options = [1, 2, 4, 8, 16, 32] # Number of MCTS workers to test
+    simulations_options = [8, 16, 32, 64, 128, 256] # SIMULATIONS_PER_MOVE    
+    worker_options = [1, 2, 4, 8, 16] # Number of MCTS workers to test
     
     # DEGUB
-    simulations_options = [50, 100] # SIMULATIONS_PER_MOVE    
-    worker_options = [1, 2] # Number of MCTS workers to test
+    # simulations_options = [50, 100] # SIMULATIONS_PER_MOVE    
+    # worker_options = [1, 2] # Number of MCTS workers to test
     # --------------------------------------
 
     logger.info(f"Starting MCTS search time experiments on {SELECTED_ENV_NAME}")
